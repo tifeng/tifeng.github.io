@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="组合数求模计算问题描述：给定三个数n,r,p求$$C_n^r \space \%p$$的值 在需要用到组合数的题目中，当计算出来的组合数很多的时候，一般都会要求组合数求模的方式给出结果。因此需要用一定的方法来进行计算组合数求模。 组合数的计算方法如下面公式所示：$$C_n^r = \frac{n!}{r!(n-r)!} = C_n^{n-r}$$   一种最简单的做法就是求出$$C_n^r$$，再">
+<meta name="description" content="组合数求模计算问题描述：给定三个数n,r,p求C_n^r \space \%p的值 在需要用到组合数的题目中，当计算出来的组合数很多的时候，一般都会要求组合数求模的方式给出结果。因此需要用一定的方法来进行计算组合数求模。 组合数的计算方法如下面公式所示：  C_n^r = \frac{n!}{r!(n-r)!} = C_n^{n-r}  一种最简单的做法就是求出C_n^r，再计算C_n^r \%p">
 <meta name="keywords" content="Mathematical,binomial coefficient,factorial,Modular Arithmetic,number-theory,DP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="组合数求模">
 <meta property="og:url" content="http://yoursite.com/2018/10/10/组合数求模计算/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="组合数求模计算问题描述：给定三个数n,r,p求$$C_n^r \space \%p$$的值 在需要用到组合数的题目中，当计算出来的组合数很多的时候，一般都会要求组合数求模的方式给出结果。因此需要用一定的方法来进行计算组合数求模。 组合数的计算方法如下面公式所示：$$C_n^r = \frac{n!}{r!(n-r)!} = C_n^{n-r}$$   一种最简单的做法就是求出$$C_n^r$$，再">
+<meta property="og:site_name" content="Tiffer&#39;s blogs">
+<meta property="og:description" content="组合数求模计算问题描述：给定三个数n,r,p求C_n^r \space \%p的值 在需要用到组合数的题目中，当计算出来的组合数很多的时候，一般都会要求组合数求模的方式给出结果。因此需要用一定的方法来进行计算组合数求模。 组合数的计算方法如下面公式所示：  C_n^r = \frac{n!}{r!(n-r)!} = C_n^{n-r}  一种最简单的做法就是求出C_n^r，再计算C_n^r \%p">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-09T16:11:08.658Z">
+<meta property="og:updated_time" content="2018-10-10T02:47:52.634Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="组合数求模">
-<meta name="twitter:description" content="组合数求模计算问题描述：给定三个数n,r,p求$$C_n^r \space \%p$$的值 在需要用到组合数的题目中，当计算出来的组合数很多的时候，一般都会要求组合数求模的方式给出结果。因此需要用一定的方法来进行计算组合数求模。 组合数的计算方法如下面公式所示：$$C_n^r = \frac{n!}{r!(n-r)!} = C_n^{n-r}$$   一种最简单的做法就是求出$$C_n^r$$，再">
+<meta name="twitter:description" content="组合数求模计算问题描述：给定三个数n,r,p求C_n^r \space \%p的值 在需要用到组合数的题目中，当计算出来的组合数很多的时候，一般都会要求组合数求模的方式给出结果。因此需要用一定的方法来进行计算组合数求模。 组合数的计算方法如下面公式所示：  C_n^r = \frac{n!}{r!(n-r)!} = C_n^{n-r}  一种最简单的做法就是求出C_n^r，再计算C_n^r \%p">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>组合数求模 | Hexo</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>组合数求模 | Tiffer's blogs</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -156,12 +156,12 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
+        <span class="site-title">Tiffer's blogs</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <p class="site-subtitle">My cheap talk and expensive code</p>
       
   </div>
 
@@ -262,7 +262,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Tiffer's blogs">
     </span>
 
     
@@ -342,14 +342,15 @@
       
 
       
-        <h3 id="组合数求模计算"><a href="#组合数求模计算" class="headerlink" title="组合数求模计算"></a>组合数求模计算</h3><p>问题描述：给定三个数n,r,p求$$C_n^r \space \%p$$的值</p>
+        <h3 id="组合数求模计算"><a href="#组合数求模计算" class="headerlink" title="组合数求模计算"></a>组合数求模计算</h3><p>问题描述：给定三个数n,r,p求<script type="math/tex">C_n^r \space \%p</script>的值</p>
 <p>在需要用到组合数的题目中，当计算出来的组合数很多的时候，一般都会要求组合数求模的方式给出结果。因此需要用一定的方法来进行计算组合数求模。</p>
-<p>组合数的计算方法如下面公式所示：<br>$$<br>C_n^r = \frac{n!}{r!(n-r)!} = C_n^{n-r}<br>$$</p>
-<p>  一种最简单的做法就是求出$$C_n^r$$，再计算$$C_n^r \%p$$，但是这种做法只适合计算出的数值较少的情况，当组合数的计算数值很大的时候，就会数值溢出了。</p>
+<p>组合数的计算方法如下面公式所示：</p>
+<script type="math/tex; mode=display">
+C_n^r = \frac{n!}{r!(n-r)!} = C_n^{n-r}</script><p>  一种最简单的做法就是求出<script type="math/tex">C_n^r</script>，再计算<script type="math/tex">C_n^r \%p</script>，但是这种做法只适合计算出的数值较少的情况，当组合数的计算数值很大的时候，就会数值溢出了。</p>
 <p>下面用三种做法来进行解决，参考文章链接见文章尾部。</p>
 <ol>
 <li>动态规划借助杨辉三角解决</li>
-<li>结合Lucas定理解决：时间复杂度为$$O(p^2*log_pn)$$,空间复杂度为$$O(p)$$</li>
+<li>结合Lucas定理解决：时间复杂度为<script type="math/tex">O(p^2*log_pn)</script>,空间复杂度为<script type="math/tex">O(p)</script></li>
 <li>结合费马小定理来解决</li>
 </ol>
 <h4 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h4><p>主要原理是使用下面的公式：</p>
@@ -366,20 +367,22 @@
 <p>但对于除法却不成立，即(a / b) % p  不等(a % p / b % p) % p 。</p>
 <p>因为取模运算对加减乘是符合分配律的，因此有：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C(n, r)%p = [ C(n-1, r-1)%p + C(n-1, r)%p ] % p</span><br><span class="line">C(n, 0) = C(n, n) = 1</span><br></pre></td></tr></table></figure>
-<p>因此可以使用动态规划，借助个二维数组，来完成计算。但是空间复杂度就是$$O(n^2)$$。可以优化到$$O(n)$$。如下面所示：</p>
+<p>因此可以使用动态规划，借助个二维数组，来完成计算。但是空间复杂度就是<script type="math/tex">O(n^2)</script>。可以优化到<script type="math/tex">O(n)</script>。如下面所示：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; </span><br><span class="line">  </span><br><span class="line"><span class="comment">// Returns nCr % p </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">nCrModp</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> r, <span class="keyword">int</span> p)</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="comment">// The array C is going to store last row of </span></span><br><span class="line">    <span class="comment">// pascal triangle at the end. And last entry </span></span><br><span class="line">    <span class="comment">// of last row is nCr </span></span><br><span class="line">    <span class="keyword">int</span> *C = <span class="keyword">new</span> <span class="keyword">int</span>[r+<span class="number">1</span>]; </span><br><span class="line">    <span class="built_in">memset</span>(C, <span class="number">0</span>, (r+<span class="number">1</span>)*<span class="keyword">sizeof</span>(<span class="keyword">int</span>)); </span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=r;i++)</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;C[i]&lt;&lt;<span class="string">" "</span>;  </span><br><span class="line">    C[<span class="number">0</span>] = <span class="number">1</span>; <span class="comment">// Top row of Pascal Triangle </span></span><br><span class="line">    <span class="comment">// One by constructs remaining rows of Pascal </span></span><br><span class="line">    <span class="comment">// Triangle from top to bottom </span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) </span><br><span class="line">    &#123; </span><br><span class="line">        <span class="comment">// Fill entries of current row using previous </span></span><br><span class="line">        <span class="comment">// row values </span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = min(i, r); j &gt; <span class="number">0</span>; j--) </span><br><span class="line">  </span><br><span class="line">            <span class="comment">// nCj = (n-1)Cj + (n-1)C(j-1); </span></span><br><span class="line">            C[j] = (C[j] + C[j<span class="number">-1</span>])%p; </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">return</span> C[r]; </span><br><span class="line">&#125; </span><br><span class="line">  </span><br><span class="line"><span class="comment">// Driver program </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">10</span>, r = <span class="number">2</span>, p = <span class="number">13</span>; </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Value of nCr % p is "</span> &lt;&lt; nCrModp(n, r, p); </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>复杂度分析：时间复杂度：O(n*r)，空间复杂度：O(n)</p>
-<h4 id="lucas-定理解决"><a href="#lucas-定理解决" class="headerlink" title="lucas 定理解决"></a>lucas 定理解决</h4><p>​       如果n很大的情况下，上述的时间复杂度回很高。因此如果p不大的情况下，且p为素数，使用lucas定理来进行解决的话，时间复杂度为$$O(p^2*log_pn)$$,空间复杂度为$$O(p)$$。</p>
+<h4 id="lucas-定理解决"><a href="#lucas-定理解决" class="headerlink" title="lucas 定理解决"></a>lucas 定理解决</h4><p>​       如果n很大的情况下，上述的时间复杂度回很高。因此如果p不大的情况下，且p为素数，使用lucas定理来进行解决的话，时间复杂度为<script type="math/tex">O(p^2*log_pn)</script>,空间复杂度为<script type="math/tex">O(p)</script>。</p>
 <p>lucas定理如下所示：</p>
-<p>For non negative integers n and r and a prime p, the following congruence relation holds:<br>$$<br>\binom{n}{r}=\prod_{i=0}^{k}\binom{n_i}{r_i}(mod \ p)<br>$$</p>
-<p>where<br>$$<br>n=n_kp^k+n_{k-1}p^{k-1}+…..+n_1p+n0<br>$$</p>
-<p>and</p>
-<p>$$<br>r=r_kp^k+r_{k-1}p^{k-1}+…..+r_1p+r0<br>$$</p>
-<p>Using Lucas Theorem for nCr % p:<br><em>Lucas theorem basically suggests that the value of nCr can be computed by multiplying results of niCri where ni and ri are individual same-positioned digits in base p representations of n and r respectively.</em>.</p>
+<p>For non negative integers n and r and a prime p, the following congruence relation holds:</p>
+<script type="math/tex; mode=display">
+\binom{n}{r}=\prod_{i=0}^{k}\binom{n_i}{r_i}(mod \ p)</script><p>where</p>
+<script type="math/tex; mode=display">
+n=n_kp^k+n_{k-1}p^{k-1}+.....+n_1p+n0</script><p>and</p>
+<script type="math/tex; mode=display">
+r=r_kp^k+r_{k-1}p^{k-1}+.....+r_1p+r0</script><p>Using Lucas Theorem for nCr % p:<br><em>Lucas theorem basically suggests that the value of nCr can be computed by multiplying results of niCri where ni and ri are individual same-positioned digits in base p representations of n and r respectively.</em>.</p>
 <p>将n,r均转化为p进制数,C(n,r)模p等于p进制数上各位的C(ni,ri)模p的乘积。利用该定理，可以将计算较大的C(n,m)转化成计算各个较小的C(ni,mi)。</p>
 <p>代码如下所示：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std; </span><br><span class="line">// Returns nCr % p </span><br><span class="line">int nCrModdp(int n, int r, int p) </span><br><span class="line">&#123; </span><br><span class="line">    // The array C is going to store last row of </span><br><span class="line">    // pascal triangle at the end. And last entry </span><br><span class="line">    // of last row is nCr </span><br><span class="line">    int *C = new int[r+1]; </span><br><span class="line">    memset(C, 0, (r+1)*sizeof(int)); </span><br><span class="line">	for(int i=0;i&lt;=r;i++)</span><br><span class="line">		cout&lt;&lt;C[i]&lt;&lt;&quot; &quot;;  </span><br><span class="line">    C[0] = 1; // Top row of Pascal Triangle </span><br><span class="line">    // One by constructs remaining rows of Pascal </span><br><span class="line">    // Triangle from top to bottom </span><br><span class="line">    for (int i = 1; i &lt;= n; i++) </span><br><span class="line">    &#123; </span><br><span class="line">        // Fill entries of current row using previous </span><br><span class="line">        // row values </span><br><span class="line">        for (int j = min(i, r); j &gt; 0; j--) </span><br><span class="line">  </span><br><span class="line">            // nCj = (n-1)Cj + (n-1)C(j-1); </span><br><span class="line">            C[j] = (C[j] + C[j-1])%p; </span><br><span class="line">    &#125; </span><br><span class="line">    return C[r]; </span><br><span class="line">&#125;   </span><br><span class="line"></span><br><span class="line">// Lucas Theorem based function that returns nCr % p </span><br><span class="line">// This function works like decimal to binary conversion </span><br><span class="line">// recursive function.  First we compute last digits of </span><br><span class="line">// n and r in base p, then recur for remaining digits </span><br><span class="line">int nCrModpLucas(int n, int r, int p) </span><br><span class="line">&#123; </span><br><span class="line">   // Base case </span><br><span class="line">   if (r==0) </span><br><span class="line">      return 1; </span><br><span class="line">  </span><br><span class="line">   // Compute last digits of n and r in base p </span><br><span class="line">   int ni = n%p, ri = r%p; </span><br><span class="line">  </span><br><span class="line">   // Compute result for last digits computed above, and </span><br><span class="line">   // for remaining digits.  Multiply the two results and </span><br><span class="line">   // compute the result of multiplication in modulo p. </span><br><span class="line">   return (nCrModpLucas(n/p, r/p, p) * // Last digits of n and r </span><br><span class="line">           nCrModdp(ni, ri, p)) % p;  // Remaining digits </span><br><span class="line">&#125; </span><br><span class="line">  </span><br><span class="line">// Driver program </span><br><span class="line">int main() </span><br><span class="line">&#123; </span><br><span class="line">    int n = 1000, r = 900, p = 13; </span><br><span class="line">    cout &lt;&lt; &quot;Value of nCr % p is &quot; &lt;&lt; nCrModpLucas(n, r, p); </span><br><span class="line">    return 0; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="费马小定理解决"><a href="#费马小定理解决" class="headerlink" title="费马小定理解决"></a>费马小定理解决</h4><p>如果给定的三个数n,r,p中，p是一个素数但是比n大很多，如果用lucas定理的话，时间复杂度为$$O(p^2)$$。因此可以使用费马小数定理解决：</p>
+<h4 id="费马小定理解决"><a href="#费马小定理解决" class="headerlink" title="费马小定理解决"></a>费马小定理解决</h4><p>如果给定的三个数n,r,p中，p是一个素数但是比n大很多，如果用lucas定理的话，时间复杂度为<script type="math/tex">O(p^2)</script>。因此可以使用费马小数定理解决：</p>
 <p>背景知识：</p>
 <p>由数论的知识我们知道，模运算的加法，减法，乘法和四则运算类似，即：<br>模运算与基本四则运算有些相似，但是除法例外。其规则如下：</p>
 <ul>
@@ -394,7 +397,7 @@
 <p>对于正整数 a和p ，如果有ax $\equiv$ 1 (mod p) ，那么把这个同余方程中x的最小正整数解叫做 a模p 的逆元。</p>
 </blockquote>
 <p>什么意思呢？ 就是指如果ax%p = 1，那么x的最小正整数解就是a的逆元。</p>
-<p>求取$$\frac{a}{b}\%p$$ 等同于求取(a*(b的逆元)%p).因此，求模运算的除法问题就转化为就一个数的逆元问题了</p>
+<p>求取<script type="math/tex">\frac{a}{b}\%p</script> 等同于求取(a*(b的逆元)%p).因此，求模运算的除法问题就转化为就一个数的逆元问题了</p>
 <p>而求取一个数的逆元，有两种方法</p>
 <blockquote>
 <ol>
@@ -403,14 +406,11 @@
 </ol>
 </blockquote>
 <p><strong>Fermat’s little theorem and modular inverse</strong>（费马小数定理和模逆元）：</p>
-<p>如果p是一个素数，则对于任何的整数a，都有$$a^p-a$$ 是$$p$$的倍数。使用模运算来进行表示则如下图所示：</p>
-<p>$$a^p \space \% \space p= a$$</p>
-<p>举例说明则是，如果a = 2 ,p = 7 则 $$2^7 - 2 = 7 \times 18$$ </p>
+<p>如果p是一个素数，则对于任何的整数a，都有<script type="math/tex">a^p-a</script> 是<script type="math/tex">p</script>的倍数。使用模运算来进行表示则如下图所示：</p>
+<script type="math/tex; mode=display">a^p \space \% \space p= a</script><p>举例说明则是，如果a = 2 ,p = 7 则 <script type="math/tex">2^7 - 2 = 7 \times 18</script> </p>
 <p>如果a不能被p整除,则有</p>
-<p>$$a^{p-1} \% p = 1 $$</p>
-<p>两边都乘以$$a^{-1}$$则有</p>
-<p>$$a^{p-2}  = a^{-1} \space (mod \space p)$$</p>
-<p>因此可以有a的逆元就是$$a^{p-2}$$。</p>
+<script type="math/tex; mode=display">a^{p-1} \% p = 1</script><p>两边都乘以<script type="math/tex">a^{-1}</script>则有</p>
+<script type="math/tex; mode=display">a^{p-2}  = a^{-1} \space (mod \space p)</script><p>因此可以有a的逆元就是<script type="math/tex">a^{p-2}</script>。</p>
 <p>则使用费马小定理的计算的思路如下面所示：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">We know the formula for  nCr </span><br><span class="line">nCr = fact(n) / (fact(r) x fact(n-r)) </span><br><span class="line">Here fact() means factorial.</span><br><span class="line"></span><br><span class="line"> nCr % p = (fac[n]* modIverse(fac[r]) % p *</span><br><span class="line">               modIverse(fac[n-r]) % p) % p;</span><br><span class="line">Here modIverse() means modular inverse under</span><br><span class="line">modulo p.</span><br></pre></td></tr></table></figure>
 <p>示例代码如下面所示：</p>
@@ -469,6 +469,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/10/hexo中数学公式不能正常显示问题解决/" rel="prev" title="hexo中数学公式不能正常显示问题解决">
+                hexo中数学公式不能正常显示问题解决 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -545,7 +549,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -556,7 +560,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -567,7 +571,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -819,7 +823,24 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 
