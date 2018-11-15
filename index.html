@@ -187,12 +187,12 @@
         </li>
       
         
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            关于
+            归档
           </a>
         </li>
       
@@ -207,12 +207,22 @@
         </li>
       
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            归档
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
           </a>
         </li>
       
@@ -342,22 +352,18 @@
       
         
           
-            <p>使用hexo搭建博客的时候，发现博客中使用到了数学公式的地方会显示不了，可以使用下面的方法进行设置：</p>
-<h3 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-math --save</span><br></pre></td></tr></table></figure>
-<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>在hexo的_config.yml中添加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">math:</span><br><span class="line">  engine: &apos;mathjax&apos; # or &apos;katex&apos;</span><br><span class="line">  mathjax:</span><br><span class="line">    # src: custom_mathjax_source</span><br><span class="line">    config:</span><br><span class="line">      # MathJax config</span><br></pre></td></tr></table></figure>
-<p>在 next 主题配置文件中 <em>themes/next-theme/_config.yml</em> 中将 mathJax 设为 true:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># MathJax Support</span><br><span class="line">mathjax:</span><br><span class="line">  enable: true</span><br><span class="line">  per_page: false</span><br><span class="line">  cdn: //cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML</span><br></pre></td></tr></table></figure>
-<p>这里需要注意，刚开始时候我的设置的cdn中为</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cdn: //cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML</span><br></pre></td></tr></table></figure>
-<p>使用这个的问题是，刚开始的前8秒能正常显示公式，但是继续就会显示失败。因此换成了下面的链接才解决。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cdn: //cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML</span><br></pre></td></tr></table></figure>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
-<li><a href="http://stevenshi.me/2017/06/26/hexo-insert-formula/" target="_blank" rel="noopener">http://stevenshi.me/2017/06/26/hexo-insert-formula/</a></li>
-<li><a href="http://blog.mobing.net/content/hexo/hexo-mathjax.html" target="_blank" rel="noopener">http://blog.mobing.net/content/hexo/hexo-mathjax.html</a></li>
-</ol>
-
-          
+          使用hexo搭建博客的时候，发现博客中使用到了数学公式的地方会显示不了，可以使用下面的方法进行设置：
+插件安装1npm install hexo-math --save
+修改配置文件在hexo的_config.yml中添加：
+123456math:  engine: &apos;mathjax&ap
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/10/hexo中数学公式不能正常显示问题解决/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -497,86 +503,19 @@
       
         
           
-            <h3 id="组合数求模计算"><a href="#组合数求模计算" class="headerlink" title="组合数求模计算"></a>组合数求模计算</h3><p>问题描述：给定三个数n,r,p求<script type="math/tex">C_n^r \space \%p</script>的值</p>
-<p>在需要用到组合数的题目中，当计算出来的组合数很多的时候，一般都会要求组合数求模的方式给出结果。因此需要用一定的方法来进行计算组合数求模。</p>
-<p>组合数的计算方法如下面公式所示：</p>
-<script type="math/tex; mode=display">
-C_n^r = \frac{n!}{r!(n-r)!} = C_n^{n-r}</script><p>  一种最简单的做法就是求出<script type="math/tex">C_n^r</script>，再计算<script type="math/tex">C_n^r \%p</script>，但是这种做法只适合计算出的数值较少的情况，当组合数的计算数值很大的时候，就会数值溢出了。</p>
-<p>下面用三种做法来进行解决，参考文章链接见文章尾部。</p>
-<ol>
-<li>动态规划借助杨辉三角解决</li>
-<li>结合Lucas定理解决：时间复杂度为<script type="math/tex">O(p^2*log_pn)</script>,空间复杂度为<script type="math/tex">O(p)</script></li>
-<li>结合费马小定理来解决</li>
-</ol>
-<h4 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h4><p>主要原理是使用下面的公式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C(n, r) = C(n-1, r-1) + C(n-1, r)</span><br><span class="line">C(n, 0) = C(n, n) = 1</span><br></pre></td></tr></table></figure>
-<p>使用上面递推公式计算C(4,3)如下面所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1==========&gt;&gt; n = 0, C(0,0) = 1</span><br><span class="line">1–1========&gt;&gt; n = 1, C(1,0) = 1, C(1,1) = 1</span><br><span class="line">1–2–1======&gt;&gt; n = 2, C(2,0) = 1, C(2,1) = 2, C(2,2) = 1</span><br><span class="line">1–3–3–1====&gt;&gt; n = 3, C(3,0) = 1, C(3,1) = 3, C(3,2) = 3, C(3,3)=1</span><br><span class="line">1–4–6–4–1==&gt;&gt; n = 4, C(4,0) = 1, C(4,1) = 4, C(4,2) = 6, C(4,3)=4, C(4,4)=1</span><br></pre></td></tr></table></figure>
-<p>补充知识：</p>
-<p>由数论的知识我们知道，模运算的加法，减法，乘法和四则运算类似，即：<br>模运算与基本四则运算有些相似，但是除法例外。其规则如下：</p>
-<ul>
-<li>(a + b) % p = (a % p + b % p) % p</li>
-<li>(a - b) % p = (a % p - b % p) % p</li>
-<li>(a <em> b) % p = (a % p </em> b % p) % p</li>
-</ul>
-<p>但对于除法却不成立，即(a / b) % p  不等(a % p / b % p) % p 。</p>
-<p>因为取模运算对加减乘是符合分配律的，因此有：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C(n, r)%p = [ C(n-1, r-1)%p + C(n-1, r)%p ] % p</span><br><span class="line">C(n, 0) = C(n, n) = 1</span><br></pre></td></tr></table></figure>
-<p>因此可以使用动态规划，借助个二维数组，来完成计算。但是空间复杂度就是<script type="math/tex">O(n^2)</script>。可以优化到<script type="math/tex">O(n)</script>。如下面所示：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; </span><br><span class="line">  </span><br><span class="line"><span class="comment">// Returns nCr % p </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">nCrModp</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> r, <span class="keyword">int</span> p)</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="comment">// The array C is going to store last row of </span></span><br><span class="line">    <span class="comment">// pascal triangle at the end. And last entry </span></span><br><span class="line">    <span class="comment">// of last row is nCr </span></span><br><span class="line">    <span class="keyword">int</span> *C = <span class="keyword">new</span> <span class="keyword">int</span>[r+<span class="number">1</span>]; </span><br><span class="line">    <span class="built_in">memset</span>(C, <span class="number">0</span>, (r+<span class="number">1</span>)*<span class="keyword">sizeof</span>(<span class="keyword">int</span>)); </span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=r;i++)</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;C[i]&lt;&lt;<span class="string">" "</span>;  </span><br><span class="line">    C[<span class="number">0</span>] = <span class="number">1</span>; <span class="comment">// Top row of Pascal Triangle </span></span><br><span class="line">    <span class="comment">// One by constructs remaining rows of Pascal </span></span><br><span class="line">    <span class="comment">// Triangle from top to bottom </span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) </span><br><span class="line">    &#123; </span><br><span class="line">        <span class="comment">// Fill entries of current row using previous </span></span><br><span class="line">        <span class="comment">// row values </span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = min(i, r); j &gt; <span class="number">0</span>; j--) </span><br><span class="line">  </span><br><span class="line">            <span class="comment">// nCj = (n-1)Cj + (n-1)C(j-1); </span></span><br><span class="line">            C[j] = (C[j] + C[j<span class="number">-1</span>])%p; </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">return</span> C[r]; </span><br><span class="line">&#125; </span><br><span class="line">  </span><br><span class="line"><span class="comment">// Driver program </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">10</span>, r = <span class="number">2</span>, p = <span class="number">13</span>; </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Value of nCr % p is "</span> &lt;&lt; nCrModp(n, r, p); </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>复杂度分析：时间复杂度：O(n*r)，空间复杂度：O(n)</p>
-<h4 id="lucas-定理解决"><a href="#lucas-定理解决" class="headerlink" title="lucas 定理解决"></a>lucas 定理解决</h4><p>​       如果n很大的情况下，上述的时间复杂度回很高。因此如果p不大的情况下，且p为素数，使用lucas定理来进行解决的话，时间复杂度为<script type="math/tex">O(p^2*log_pn)</script>,空间复杂度为<script type="math/tex">O(p)</script>。</p>
-<p>lucas定理如下所示：</p>
-<p>For non negative integers n and r and a prime p, the following congruence relation holds:</p>
-<script type="math/tex; mode=display">
-\binom{n}{r}=\prod_{i=0}^{k}\binom{n_i}{r_i}(mod \ p)</script><p>where</p>
-<script type="math/tex; mode=display">
-n=n_kp^k+n_{k-1}p^{k-1}+.....+n_1p+n0</script><p>and</p>
-<script type="math/tex; mode=display">
-r=r_kp^k+r_{k-1}p^{k-1}+.....+r_1p+r0</script><p>Using Lucas Theorem for nCr % p:<br><em>Lucas theorem basically suggests that the value of nCr can be computed by multiplying results of niCri where ni and ri are individual same-positioned digits in base p representations of n and r respectively.</em>.</p>
-<p>将n,r均转化为p进制数,C(n,r)模p等于p进制数上各位的C(ni,ri)模p的乘积。利用该定理，可以将计算较大的C(n,m)转化成计算各个较小的C(ni,mi)。</p>
-<p>代码如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std; </span><br><span class="line">// Returns nCr % p </span><br><span class="line">int nCrModdp(int n, int r, int p) </span><br><span class="line">&#123; </span><br><span class="line">    // The array C is going to store last row of </span><br><span class="line">    // pascal triangle at the end. And last entry </span><br><span class="line">    // of last row is nCr </span><br><span class="line">    int *C = new int[r+1]; </span><br><span class="line">    memset(C, 0, (r+1)*sizeof(int)); </span><br><span class="line">	for(int i=0;i&lt;=r;i++)</span><br><span class="line">		cout&lt;&lt;C[i]&lt;&lt;&quot; &quot;;  </span><br><span class="line">    C[0] = 1; // Top row of Pascal Triangle </span><br><span class="line">    // One by constructs remaining rows of Pascal </span><br><span class="line">    // Triangle from top to bottom </span><br><span class="line">    for (int i = 1; i &lt;= n; i++) </span><br><span class="line">    &#123; </span><br><span class="line">        // Fill entries of current row using previous </span><br><span class="line">        // row values </span><br><span class="line">        for (int j = min(i, r); j &gt; 0; j--) </span><br><span class="line">  </span><br><span class="line">            // nCj = (n-1)Cj + (n-1)C(j-1); </span><br><span class="line">            C[j] = (C[j] + C[j-1])%p; </span><br><span class="line">    &#125; </span><br><span class="line">    return C[r]; </span><br><span class="line">&#125;   </span><br><span class="line"></span><br><span class="line">// Lucas Theorem based function that returns nCr % p </span><br><span class="line">// This function works like decimal to binary conversion </span><br><span class="line">// recursive function.  First we compute last digits of </span><br><span class="line">// n and r in base p, then recur for remaining digits </span><br><span class="line">int nCrModpLucas(int n, int r, int p) </span><br><span class="line">&#123; </span><br><span class="line">   // Base case </span><br><span class="line">   if (r==0) </span><br><span class="line">      return 1; </span><br><span class="line">  </span><br><span class="line">   // Compute last digits of n and r in base p </span><br><span class="line">   int ni = n%p, ri = r%p; </span><br><span class="line">  </span><br><span class="line">   // Compute result for last digits computed above, and </span><br><span class="line">   // for remaining digits.  Multiply the two results and </span><br><span class="line">   // compute the result of multiplication in modulo p. </span><br><span class="line">   return (nCrModpLucas(n/p, r/p, p) * // Last digits of n and r </span><br><span class="line">           nCrModdp(ni, ri, p)) % p;  // Remaining digits </span><br><span class="line">&#125; </span><br><span class="line">  </span><br><span class="line">// Driver program </span><br><span class="line">int main() </span><br><span class="line">&#123; </span><br><span class="line">    int n = 1000, r = 900, p = 13; </span><br><span class="line">    cout &lt;&lt; &quot;Value of nCr % p is &quot; &lt;&lt; nCrModpLucas(n, r, p); </span><br><span class="line">    return 0; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="费马小定理解决"><a href="#费马小定理解决" class="headerlink" title="费马小定理解决"></a>费马小定理解决</h4><p>如果给定的三个数n,r,p中，p是一个素数但是比n大很多，如果用lucas定理的话，时间复杂度为<script type="math/tex">O(p^2)</script>。因此可以使用费马小数定理解决：</p>
-<p>背景知识：</p>
-<p>由数论的知识我们知道，模运算的加法，减法，乘法和四则运算类似，即：<br>模运算与基本四则运算有些相似，但是除法例外。其规则如下：</p>
-<ul>
-<li>(a + b) % p = (a % p + b % p) % p</li>
-<li>(a - b) % p = (a % p - b % p) % p</li>
-<li>(a <em> b) % p = (a % p </em> b % p) % p</li>
-</ul>
-<p>但对于除法却不成立，即(a / b) % p不等于  (a % p / b % p) % p 。</p>
-<p>显然数学家们是不能忍受这种局面的，他们扔出了<strong>“逆元”</strong>来解决这个问题。那么什么是逆元？ 逆元和模运算中的除法又有说明关系呢？</p>
-<p>首先给出数论中的解释：</p>
-<blockquote>
-<p>对于正整数 a和p ，如果有ax $\equiv$ 1 (mod p) ，那么把这个同余方程中x的最小正整数解叫做 a模p 的逆元。</p>
-</blockquote>
-<p>什么意思呢？ 就是指如果ax%p = 1，那么x的最小正整数解就是a的逆元。</p>
-<p>求取<script type="math/tex">\frac{a}{b}\%p</script> 等同于求取(a*(b的逆元)%p).因此，求模运算的除法问题就转化为就一个数的逆元问题了</p>
-<p>而求取一个数的逆元，有两种方法</p>
-<blockquote>
-<ol>
-<li>拓展欧几里得算法</li>
-<li>费马小定理</li>
-</ol>
-</blockquote>
-<p><strong>Fermat’s little theorem and modular inverse</strong>（费马小数定理和模逆元）：</p>
-<p>如果p是一个素数，则对于任何的整数a，都有<script type="math/tex">a^p-a</script> 是<script type="math/tex">p</script>的倍数。使用模运算来进行表示则如下图所示：</p>
-<script type="math/tex; mode=display">a^p \space \% \space p= a</script><p>举例说明则是，如果a = 2 ,p = 7 则 <script type="math/tex">2^7 - 2 = 7 \times 18</script> </p>
-<p>如果a不能被p整除,则有</p>
-<script type="math/tex; mode=display">a^{p-1} \% p = 1</script><p>两边都乘以<script type="math/tex">a^{-1}</script>则有</p>
-<script type="math/tex; mode=display">a^{p-2}  = a^{-1} \space (mod \space p)</script><p>因此可以有a的逆元就是<script type="math/tex">a^{p-2}</script>。</p>
-<p>则使用费马小定理的计算的思路如下面所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">We know the formula for  nCr </span><br><span class="line">nCr = fact(n) / (fact(r) x fact(n-r)) </span><br><span class="line">Here fact() means factorial.</span><br><span class="line"></span><br><span class="line"> nCr % p = (fac[n]* modIverse(fac[r]) % p *</span><br><span class="line">               modIverse(fac[n-r]) % p) % p;</span><br><span class="line">Here modIverse() means modular inverse under</span><br><span class="line">modulo p.</span><br></pre></td></tr></table></figure>
-<p>示例代码如下面所示：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt; </span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; </span><br><span class="line">  </span><br><span class="line"><span class="comment">/* Iterative Function to calculate (x^y)%p </span></span><br><span class="line"><span class="comment">  in O(log y) */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">power</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> p)</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">1</span>;      <span class="comment">// Initialize result </span></span><br><span class="line">  </span><br><span class="line">    x = x % p;  <span class="comment">// Update x if it is more than or </span></span><br><span class="line">                <span class="comment">// equal to p </span></span><br><span class="line">  </span><br><span class="line">    <span class="keyword">while</span> (y &gt; <span class="number">0</span>) </span><br><span class="line">    &#123; </span><br><span class="line">        <span class="comment">// If y is odd, multiply x with result </span></span><br><span class="line">        <span class="keyword">if</span> (y &amp; <span class="number">1</span>) </span><br><span class="line">            res = (res*x) % p; </span><br><span class="line">  </span><br><span class="line">        <span class="comment">// y must be even now </span></span><br><span class="line">        y = y&gt;&gt;<span class="number">1</span>; <span class="comment">// y = y/2 </span></span><br><span class="line">        x = (x*x) % p; </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">return</span> res; </span><br><span class="line">&#125; </span><br><span class="line">  </span><br><span class="line"><span class="comment">// Returns n^(-1) mod p </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">modInverse</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> p)</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="keyword">return</span> power(n, p<span class="number">-2</span>, p); </span><br><span class="line">&#125; </span><br><span class="line">  </span><br><span class="line"><span class="comment">// Returns nCr % p using Fermat's little </span></span><br><span class="line"><span class="comment">// theorem. </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">nCrModPFermat</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> r, <span class="keyword">int</span> p)</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">   <span class="comment">// Base case </span></span><br><span class="line">   <span class="keyword">if</span> (r==<span class="number">0</span>) </span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>; </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// Fill factorial array so that we </span></span><br><span class="line">    <span class="comment">// can find all factorial of r, n </span></span><br><span class="line">    <span class="comment">// and n-r </span></span><br><span class="line">    <span class="keyword">int</span> fac[n+<span class="number">1</span>]; </span><br><span class="line">    fac[<span class="number">0</span>] = <span class="number">1</span>; </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span> ; i&lt;=n; i++) </span><br><span class="line">        fac[i] = fac[i<span class="number">-1</span>]*i%p; </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> (fac[n]* modInverse(fac[r], p) % p * </span><br><span class="line">            modInverse(fac[n-r], p) % p) % p; </span><br><span class="line">&#125; </span><br><span class="line">  </span><br><span class="line"><span class="comment">// Driver program </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="comment">// p must be a prime greater than n. </span></span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">10</span>, r = <span class="number">2</span>, p = <span class="number">13</span>; </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Value of nCr % p is "</span></span><br><span class="line">         &lt;&lt; nCrModPFermat(n, r, p); </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>参考链接：</p>
-<p>1.<a href="https://www.geeksforgeeks.org/compute-ncr-p-set-1-introduction-and-dynamic-programming-solution/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/compute-ncr-p-set-1-introduction-and-dynamic-programming-solution/</a></p>
-<p>2.<a href="https://www.geeksforgeeks.org/compute-ncr-p-set-2-lucas-theorem/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/compute-ncr-p-set-2-lucas-theorem/</a></p>
-<p>3.<a href="https://www.geeksforgeeks.org/compute-ncr-p-set-3-using-fermat-little-theorem/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/compute-ncr-p-set-3-using-fermat-little-theorem/</a></p>
-<p>4.<a href="https://www.zybuluo.com/ArrowLLL/note/713749" target="_blank" rel="noopener">https://www.zybuluo.com/ArrowLLL/note/713749</a></p>
+          组合数求模计算问题描述：给定三个数n,r,p求C_n^r \space \%p的值
+在需要用到组合数的题目中，当计算出来的组合数很多的时候，一般都会要求组合数求模的方式给出结果。因此需要用一定的方法来进行计算组合数求模。
+组合数的计算方法如下面公式所示：
 
-          
+C_n^r = \frac{n!}{r!(
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/10/组合数求模计算/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -716,29 +655,15 @@ r=r_kp^k+r_{k-1}p^{k-1}+.....+r_1p+r0</script><p>Using Lucas Theorem for nCr % p
       
         
           
-            <h1 id="Learning-to-rank"><a href="#Learning-to-rank" class="headerlink" title="Learning to rank"></a>Learning to rank</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="pointwise"><a href="#pointwise" class="headerlink" title="pointwise"></a>pointwise</h3><p>Each query-document pair in the training set has a numerical or<br>ordinal score. The learning-to-rank problem can be seen as a regression or classification<br>problem, where each item is scored independently of the others. An ordering of the items<br>is then obtained by sorting on the scores.</p>
-<p>Advantages:<br>• Existing methodologies and theories on regression or classification are directly supported.<br>Drawbacks:<br>• The relative order between the documents isn’t taken into account, as each document<br>is considered separately.<br>• The pointwise approach overlooks the fact that some documents belong to the same<br>queries. This results in a greater impact of the queries with a large number of associated<br>documents when the distribution of documents per queries varies considerably.<br>• The actual position of each document in the list is not taken into consideration in the<br>loss function.<br>Examples state-of-the-art algoritms: PRank [4], McRank [5]</p>
-<h3 id="pairwise"><a href="#pairwise" class="headerlink" title="pairwise"></a>pairwise</h3><p>The model works as a binary classifier, predicting which document<br>in a given pair is the most relevant with respect to a certain query. The learned preference<br>function can then be embedded as the comparator into a classical sorting algorithm to<br>provide a global ranking of the set of items.</p>
-<p>Advantages:<br>• Like in the pointwise approach, existing methodologies and theories on regression<br>or classification are in large parts supported. Furthermore, the pairwise approach is<br>able to model the relative order between documents.<br>Drawbacks:<br>• Most algorithms don’t take the multiple levels of relevance degrees into consideration.<br>A document pair consisting of two documents labeled “Perfect” and “Bad” is<br>treated in the same way as a document pair consisting of two documents labeled<br>“Good” and “Fair”. This results in a loss of information.<br>1.1. Learning to Rank 7<br>• The unbalanced distribution between documents is a greater issue than in the pointwise<br>approach, as the number of pairs is of quadratic order with respect to the number<br>of documents. The model will therefore be biased towards the queries with a<br>higher number of associated documents.<br>• The pairwise approach is more sensible to noisy data. A single mis-labeled document<br>can result in a huge number of mis-labeled document pairs.<br>• The actual position of each document in the list is not taken into account in the loss<br>function. However, compared to the pointwise approach the relative order between<br>pairs of documents is considered.<br>Examples state-of-the-art algoritms: RankSVM [6], RankBoost [7], RankNet [8], LambdaRank [9],<br>SortNet [10]</p>
-<h3 id="Listwise"><a href="#Listwise" class="headerlink" title="Listwise"></a>Listwise</h3><p>The model takes lists as instances and tries to directly optimize the<br>value of one of the evaluation measures3.<br>Advantages:<br>• The listwise approach addresses the learning-to-rank problem in the most natural<br>way, by taking document lists as instances in the learning process.<br>Drawbacks:<br>• The resulting optimization problem is more challenging than those in the pointwise<br>or pairwise approach, due to the non-continuous and non-differentiable loss function.<br>This often results in higher time complexities.<br>Examples state-of-the-art algoritms: AdaRank [3], ListNet [11]</p>
-<h2 id="learning-to-rank-代码"><a href="#learning-to-rank-代码" class="headerlink" title="learning to rank 代码"></a>learning to rank 代码</h2><ol>
-<li><p>业界首选:LEMUR.Ranklib project incorporates many algorithms in C++</p>
-<p><a href="http://sourceforge.net/projects/lemur/" target="_blank" rel="noopener">http://sourceforge.net/projects/lemur/</a></p>
-</li>
-<li><p><a href="https://bitbucket.org/ilps/lerot" target="_blank" rel="noopener">LEROT</a>: written in python <em>online learning to rank</em> framework.<br>Also there is less detailed, butlonger list of datasets: <a href="https://bitbucket.org/ilps/lerot#rst-header-data" target="_blank" rel="noopener">https://bitbucket.org/ilps/lerot#rst-header-data</a></p>
-</li>
-<li><p><a href="https://github.com/ogrisel/notebooks/blob/master/Learning%20to%20Rank.ipynb" target="_blank" rel="noopener">IPython demo</a> on learning to rank</p>
-</li>
-<li><p>pyltr包含有lambdaRank. <a href="https://github.com/jma127/pyltr" target="_blank" rel="noopener">https://github.com/jma127/pyltr</a></p>
-</li>
-<li><p>rankpy包含有lambdaRank</p>
-</li>
-</ol>
-<h2 id="重要参考网站"><a href="#重要参考网站" class="headerlink" title="重要参考网站"></a>重要参考网站</h2><ol>
-<li><a href="http://arogozhnikov.github.io/2015/06/26/learning-to-rank-software-datasets.html" target="_blank" rel="noopener">learning to rank(software,datasets)</a></li>
-</ol>
-
-          
+          Learning to rank简介pointwiseEach query-document pair in the training set has a numerical orordinal score. The learning-to-rank problem can be seen as a
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/03/Learning to rank/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -804,7 +729,7 @@ r=r_kp^k+r_{k-1}p^{k-1}+.....+r_1p+r0</script><p>Using Lucas Theorem for nCr % p
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/03/07/hello-world/" itemprop="url">Hello World</a></h1>
+                <a class="post-title-link" href="/2018/03/07/hello-world/" itemprop="url">Hexo 搭建博客记录</a></h1>
         
 
         <div class="post-meta">
@@ -826,6 +751,28 @@ r=r_kp^k+r_{k-1}p^{k-1}+.....+r_1p+r0</script><p>Using Lucas Theorem for nCr % p
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">hexo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -856,17 +803,15 @@ r=r_kp^k+r_{k-1}p^{k-1}+.....+r_1p+r0</script><p>Using Lucas Theorem for nCr % p
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
+          1. Hello hexoWelcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find t
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/07/hello-world/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
