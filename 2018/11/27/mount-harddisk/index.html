@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="​        在linux系统中对新加入的硬盘进行使用，要对硬盘进行分区、格式化、挂载等。下面以实验室的集群中的一台计算节点挂载新硬盘进行介绍。 查看磁盘信息使用fdisk -l命令，该命令要管理员权限才能操作 1#fdisk -l 会出现机子中的磁盘的信息，如下面所示： 1234567891011121314151617181920212223242526272829Disk /dev/sd">
+<meta name="keywords" content="linux,集群,服务器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux下对新硬盘进行分区以及挂载">
+<meta property="og:url" content="http://yoursite.com/2018/11/27/mount-harddisk/index.html">
+<meta property="og:site_name" content="Tiffer&#39;s blogs">
+<meta property="og:description" content="​        在linux系统中对新加入的硬盘进行使用，要对硬盘进行分区、格式化、挂载等。下面以实验室的集群中的一台计算节点挂载新硬盘进行介绍。 查看磁盘信息使用fdisk -l命令，该命令要管理员权限才能操作 1#fdisk -l 会出现机子中的磁盘的信息，如下面所示： 1234567891011121314151617181920212223242526272829Disk /dev/sd">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-11-27T14:50:46.547Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux下对新硬盘进行分区以及挂载">
+<meta name="twitter:description" content="​        在linux系统中对新加入的硬盘进行使用，要对硬盘进行分区、格式化、挂载等。下面以实验室的集群中的一台计算节点挂载新硬盘进行介绍。 查看磁盘信息使用fdisk -l命令，该命令要管理员权限才能操作 1#fdisk -l 会出现机子中的磁盘的信息，如下面所示： 1234567891011121314151617181920212223242526272829Disk /dev/sd">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/27/mount-harddisk/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>linux下对新硬盘进行分区以及挂载 | Tiffer's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tiffer's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">My cheap talk and expensive code</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/27/mount-harddisk/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tiffer Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tiffer's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">linux下对新硬盘进行分区以及挂载
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-27 21:26:51 / 修改时间：22:50:46" itemprop="dateCreated datePublished" datetime="2018-11-27T21:26:51+08:00">2018-11-27</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/27/mount-harddisk/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/11/27/mount-harddisk/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/11/27/mount-harddisk/" class="leancloud_visitors" data-flag-title="linux下对新硬盘进行分区以及挂载">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>​        在linux系统中对新加入的硬盘进行使用，要对硬盘进行分区、格式化、挂载等。下面以实验室的集群中的一台计算节点挂载新硬盘进行介绍。</p>
+<h3 id="查看磁盘信息"><a href="#查看磁盘信息" class="headerlink" title="查看磁盘信息"></a>查看磁盘信息</h3><p>使用<code>fdisk -l</code>命令，该命令要管理员权限才能操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#fdisk -l</span><br></pre></td></tr></table></figure>
+<p>会出现机子中的磁盘的信息，如下面所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">Disk /dev/sdc: 299.4 GB, 299439751168 bytes</span><br><span class="line">255 heads, 63 sectors/track, 36404 cylinders, total 584843264 sectors</span><br><span class="line">Units = sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br><span class="line">Disk identifier: 0x000a4f4c</span><br><span class="line"></span><br><span class="line">   Device Boot      Start         End      Blocks   Id  System</span><br><span class="line">/dev/sdc1   *        2048   450754559   225376256   83  Linux</span><br><span class="line">/dev/sdc2       450756606   584841215    67042305    5  Extended</span><br><span class="line">/dev/sdc5       450756608   584841215    67042304   82  Linux swap / Solaris</span><br><span class="line"></span><br><span class="line">Disk /dev/sda: 900.2 GB, 900185481216 bytes</span><br><span class="line">255 heads, 63 sectors/track, 109441 cylinders, total 1758174768 sectors</span><br><span class="line">Units = sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br><span class="line">Disk identifier: 0x00000000</span><br><span class="line"></span><br><span class="line">Disk /dev/sda doesn&apos;t contain a valid partition table</span><br><span class="line"></span><br><span class="line">Disk /dev/sdb: 900.2 GB, 900185481216 bytes</span><br><span class="line">255 heads, 63 sectors/track, 109441 cylinders, total 1758174768 sectors</span><br><span class="line">Units = sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br><span class="line">Disk identifier: 0x00000000</span><br><span class="line"></span><br><span class="line">Disk /dev/sdb doesn&apos;t contain a valid partition table</span><br></pre></td></tr></table></figure>
+<p>会看到有：</p>
+<p><code>Disk /dev/sda doesn&#39;t contain a valid partition table</code></p>
+<p><code>Disk /dev/sdb doesn&#39;t contain a valid partition table</code></p>
+<p>说明磁盘/dev/sda以及/dev/sdb都没有进行分区，当然也没有进行使用，但是容量都是900多GB。</p>
+<h3 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h3><p>使用fdisk命令对/dev/sda进行分区，下面的命令基本上都要使用管理员权限才能使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#fdisk /dev/sda</span><br></pre></td></tr></table></figure>
+<p>敲入命令之后，根据提示进行操作即可：</p>
+<p>Device contains neither a valid DOS partition table, nor Sun, SGI or OSF disklabel</p>
+<p>Building a new DOS disklabel with disk identifier 0x88badac8.</p>
+<p>Changes will remain in memory only, until you decide to write them.</p>
+<p>After that, of course, the previous content won’t be recoverable.</p>
+<p>Warning: invalid flag 0x0000 of partition table 4 will be corrected by w(rite)</p>
+<p>Command (m for help): <strong>m  （m为查看对应命令）</strong></p>
+<p>Command action</p>
+<p>   a   toggle a bootable flag</p>
+<p>   b   edit bsd disklabel</p>
+<p>   c   toggle the dos compatibility flag</p>
+<p>   d   delete a partition</p>
+<p>   l   list known partition types</p>
+<p>   m   print this menu</p>
+<p>   n   add a new partition</p>
+<p>   o   create a new empty DOS partition table</p>
+<p>   p   print the partition table</p>
+<p>   q   quit without saving changes</p>
+<p>   s   create a new empty Sun disklabel</p>
+<p>   t   change a partition’s system id</p>
+<p>   u   change display/entry units</p>
+<p>   v   verify the partition table</p>
+<p>   w   write table to disk and exit</p>
+<p>   x   extra functionality (experts only)</p>
+<p>Command (m for help): <strong>n （n为新加分区）</strong></p>
+<p>Partition type:  </p>
+<p>   p   primary (0 primary, 0 extended, 4 free)</p>
+<p>   e   extended</p>
+<p>Select (default p):          <strong>（p为主分区，e为逻辑分区，直接回车保持默认）</strong></p>
+<p>Using default response p</p>
+<p>Partition number (1-4, default 1):  <strong>（直接回车保持默认选项，下面也是）</strong></p>
+<p>Using default value 1</p>
+<p>First sector (2048-1758174767, default 2048):</p>
+<p>Using default value 2048</p>
+<p>Last sector, +sectors or +size{K,M,G} (2048-1758174767, default 1758174767):</p>
+<p>Using default value 1758174767</p>
+<p>Command (m for help): p  <strong>（打印查看分区表）</strong></p>
+<p>Disk /dev/sda: 900.2 GB, 900185481216 bytes</p>
+<p>255 heads, 63 sectors/track, 109441 cylinders, total 1758174768 sectors</p>
+<p>Units = sectors of 1 * 512 = 512 bytes</p>
+<p>Sector size (logical/physical): 512 bytes / 512 bytes</p>
+<p>I/O size (minimum/optimal): 512 bytes / 512 bytes</p>
+<p>Disk identifier: 0x88badac8</p>
+<p>   Device Boot      Start         End      Blocks   Id  System</p>
+<p>/dev/sda1            2048  1758174767   879086360   83  Linux</p>
+<p>Command (m for help): w   <strong>（写入分区，保存并退出）</strong></p>
+<p>The partition table has been altered!</p>
+<p>Calling ioctl() to re-read partition table.</p>
+<p>Syncing disks.</p>
+<h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><p>再次使用<code>fdisk -l</code>可以看到刚新建的<code>/dev/sda1</code>分区的信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Disk /dev/sda: 900.2 GB, 900185481216 bytes</span><br><span class="line">81 heads, 63 sectors/track, 344537 cylinders, total 1758174768 sectors</span><br><span class="line">Units = sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br><span class="line">Disk identifier: 0x88badac8</span><br><span class="line"></span><br><span class="line">   Device Boot      Start         End      Blocks   Id  System</span><br><span class="line">/dev/sda1            2048  1758174767   879086360   83  Linux</span><br></pre></td></tr></table></figure>
+<h3 id="格式化分区"><a href="#格式化分区" class="headerlink" title="格式化分区"></a>格式化分区</h3><p>对分区使用ext4进行格式化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># mkfs.ext4 /dev/sda1</span><br></pre></td></tr></table></figure>
+<p>会出现如下的信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">mke2fs 1.42.9 (4-Feb-2014)</span><br><span class="line">Filesystem label=</span><br><span class="line">OS type: Linux</span><br><span class="line">Block size=4096 (log=2)</span><br><span class="line">Fragment size=4096 (log=2)</span><br><span class="line">Stride=0 blocks, Stripe width=0 blocks</span><br><span class="line">54943744 inodes, 219771590 blocks</span><br><span class="line">10988579 blocks (5.00%) reserved for the super user</span><br><span class="line">First data block=0</span><br><span class="line">Maximum filesystem blocks=4294967296</span><br><span class="line">6707 block groups</span><br><span class="line">32768 blocks per group, 32768 fragments per group</span><br><span class="line">8192 inodes per group</span><br><span class="line">Superblock backups stored on blocks:</span><br><span class="line">        32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208,</span><br><span class="line">        4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968,</span><br><span class="line">        102400000, 214990848</span><br><span class="line"></span><br><span class="line">Allocating group tables: done</span><br><span class="line">Writing inode tables: done</span><br><span class="line">Creating journal (32768 blocks): done</span><br><span class="line">Writing superblocks and filesystem accounting information: done</span><br></pre></td></tr></table></figure>
+<h3 id="挂载分区"><a href="#挂载分区" class="headerlink" title="挂载分区"></a>挂载分区</h3><p>先创建要挂载的目录,这里是<code>/disk1</code>文件夹</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#mkdir /disk1</span><br></pre></td></tr></table></figure>
+<p>挂载分区</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#mount /dev/sda1 /disk1</span><br></pre></td></tr></table></figure>
+<h3 id="查看信息"><a href="#查看信息" class="headerlink" title="查看信息"></a>查看信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#df -lh</span><br></pre></td></tr></table></figure>
+<p>能看到有下面刚挂载上去的分区信息，如下面所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/dev/sda1             826G   73M  784G   1% /disk1</span><br></pre></td></tr></table></figure>
+<h3 id="设置系统开机自动挂载硬盘"><a href="#设置系统开机自动挂载硬盘" class="headerlink" title="设置系统开机自动挂载硬盘"></a>设置系统开机自动挂载硬盘</h3><p>通过编辑文件<code>/etc/fstab</code>加上新加载的硬盘的信息，如下面所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#vim /etc/fstab</span><br></pre></td></tr></table></figure>
+<p>添加上下面这行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/dev/sda1 /disk1 ext4 defaults 0 0</span><br></pre></td></tr></table></figure>
+<p>其中各个字段的意思在后面讲述。</p>
+<p>实际使用中，为了保持和集群中原来的配置一样，原来都是使用了UUID进行标识，因此这里也是使用UUID,查看设备的uuid可以使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#blkid</span><br></pre></td></tr></table></figure>
+<p>查看/dev/sda1的uuid，然后<code>/etc/fstab</code>中添加的为下面所示的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UUID=xxxx /disk1 ext4 defaults 0 0</span><br></pre></td></tr></table></figure>
+<h3 id="重启即可"><a href="#重启即可" class="headerlink" title="重启即可"></a>重启即可</h3><p>重启服务器，<code>df -h</code>看到挂载信息预期一样的话，大功告成。</p>
+<h3 id="etc-fstab文件字段含义"><a href="#etc-fstab文件字段含义" class="headerlink" title="/etc/fstab文件字段含义"></a>/etc/fstab文件字段含义</h3><p><code>/etc/fstab</code>文件的一行的各个字段如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;file system&gt; &lt;mount point&gt; &lt;type&gt; &lt;options&gt; &lt;dump&gt; &lt;pass&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>file system指的是设备，硬盘以及分区，可以使用分区如/dev/sda1或者UUID来进行识别。</p>
+</li>
+<li><p>mount point 就是挂载点了</p>
+</li>
+<li>type指挂载设备或者分区是何种文件类型，如ext3,etx4,xfs,ntfs,swap等</li>
+<li>options指定了mount的选项。不懂的话，直接使用defaults（默认）。<ul>
+<li>defaults 使用默认设置rw,suid,dev,exec,auto,nouser,async</li>
+<li>noauto 只能手动挂载,与auto对应</li>
+<li>user 允许任何用户挂载设备。nouser 只允许root用户挂载,这是默认设置</li>
+<li>exec 是一个默认设置项，它使在那个分区中的可执行的二进制文件能够执行。noexec 二进制文件不允许执行。千万不要在你的root分区中用这个选项</li>
+<li>comment</li>
+<li>nofail</li>
+<li>…</li>
+</ul>
+</li>
+<li>dump 是否对这个分区进行备份，默认0就是不备份,1就是作一个备份。</li>
+<li>pass 该字段被<code>fsck</code>命令进行使用的，来决定在boot的时候分区的检查顺序。其中root分区要设为1。0的话就是不被fsck进行检查。1的话就是被检查的其他分区。</li>
+</ul>
+<p>/etc/fstab详细说明可以参看链接：</p>
+<ol>
+<li><a href="https://wiki.archlinux.org/index.php/fstab" target="_blank" rel="noopener">fstab</a></li>
+<li><a href="http://man7.org/linux/man-pages/man5/fstab.5.html" target="_blank" rel="noopener">fstab linux manual</a></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+            <a href="/tags/集群/" rel="tag"># 集群</a>
+          
+            <a href="/tags/服务器/" rel="tag"># 服务器</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/10/hexo中数学公式不能正常显示问题解决/" rel="next" title="hexo中数学公式不能正常显示问题解决">
+                <i class="fa fa-chevron-left"></i> hexo中数学公式不能正常显示问题解决
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tiffer Wu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看磁盘信息"><span class="nav-number">1.</span> <span class="nav-text">查看磁盘信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区"><span class="nav-number">2.</span> <span class="nav-text">分区</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看"><span class="nav-number"></span> <span class="nav-text">查看</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#格式化分区"><span class="nav-number">1.</span> <span class="nav-text">格式化分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载分区"><span class="nav-number">2.</span> <span class="nav-text">挂载分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看信息"><span class="nav-number">3.</span> <span class="nav-text">查看信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置系统开机自动挂载硬盘"><span class="nav-number">4.</span> <span class="nav-text">设置系统开机自动挂载硬盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重启即可"><span class="nav-number">5.</span> <span class="nav-text">重启即可</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#etc-fstab文件字段含义"><span class="nav-number">6.</span> <span class="nav-text">/etc/fstab文件字段含义</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tiffer Wu</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.6.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.5.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: true,
+        appId: 'kxwsdhNBThL0latloj431Ffh-gzGzoHsz',
+        appKey: 'SxeVKYNvgcVee4nMym02K2cr',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "xym1UfMWvo8OfAfRVfWtJX81-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "xym1UfMWvo8OfAfRVfWtJX81-gzGzoHsz",
+                'X-LC-Key': "xPvEd5tPh5VbpLxhjnhy1h3Y",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
