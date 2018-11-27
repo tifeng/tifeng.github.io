@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="Tiffer&#39;s blogs">
 <meta property="og:description" content="​        在linux系统中对新加入的硬盘进行使用，要对硬盘进行分区、格式化、挂载等。下面以实验室的集群中的一台计算节点挂载新硬盘进行介绍。 查看磁盘信息使用fdisk -l命令，该命令要管理员权限才能操作 1#fdisk -l 会出现机子中的磁盘的信息，如下面所示： 1234567891011121314151617181920212223242526272829Disk /dev/sd">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-27T14:50:46.547Z">
+<meta property="og:updated_time" content="2018-11-27T14:54:43.012Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux下对新硬盘进行分区以及挂载">
 <meta name="twitter:description" content="​        在linux系统中对新加入的硬盘进行使用，要对硬盘进行分区、格式化、挂载等。下面以实验室的集群中的一台计算节点挂载新硬盘进行介绍。 查看磁盘信息使用fdisk -l命令，该命令要管理员权限才能操作 1#fdisk -l 会出现机子中的磁盘的信息，如下面所示： 1234567891011121314151617181920212223242526272829Disk /dev/sd">
@@ -398,7 +398,7 @@
                 
               
 
-              <time title="创建时间：2018-11-27 21:26:51 / 修改时间：22:50:46" itemprop="dateCreated datePublished" datetime="2018-11-27T21:26:51+08:00">2018-11-27</time>
+              <time title="创建时间：2018-11-27 21:26:51 / 修改时间：22:54:43" itemprop="dateCreated datePublished" datetime="2018-11-27T21:26:51+08:00">2018-11-27</time>
             
 
             
@@ -535,7 +535,7 @@
 <p>The partition table has been altered!</p>
 <p>Calling ioctl() to re-read partition table.</p>
 <p>Syncing disks.</p>
-<h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><p>再次使用<code>fdisk -l</code>可以看到刚新建的<code>/dev/sda1</code>分区的信息</p>
+<h3 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h3><p>再次使用<code>fdisk -l</code>可以看到刚新建的<code>/dev/sda1</code>分区的信息</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Disk /dev/sda: 900.2 GB, 900185481216 bytes</span><br><span class="line">81 heads, 63 sectors/track, 344537 cylinders, total 1758174768 sectors</span><br><span class="line">Units = sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br><span class="line">Disk identifier: 0x88badac8</span><br><span class="line"></span><br><span class="line">   Device Boot      Start         End      Blocks   Id  System</span><br><span class="line">/dev/sda1            2048  1758174767   879086360   83  Linux</span><br></pre></td></tr></table></figure>
 <h3 id="格式化分区"><a href="#格式化分区" class="headerlink" title="格式化分区"></a>格式化分区</h3><p>对分区使用ext4进行格式化</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># mkfs.ext4 /dev/sda1</span><br></pre></td></tr></table></figure>
@@ -798,7 +798,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看磁盘信息"><span class="nav-number">1.</span> <span class="nav-text">查看磁盘信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区"><span class="nav-number">2.</span> <span class="nav-text">分区</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看"><span class="nav-number"></span> <span class="nav-text">查看</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#格式化分区"><span class="nav-number">1.</span> <span class="nav-text">格式化分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载分区"><span class="nav-number">2.</span> <span class="nav-text">挂载分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看信息"><span class="nav-number">3.</span> <span class="nav-text">查看信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置系统开机自动挂载硬盘"><span class="nav-number">4.</span> <span class="nav-text">设置系统开机自动挂载硬盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重启即可"><span class="nav-number">5.</span> <span class="nav-text">重启即可</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#etc-fstab文件字段含义"><span class="nav-number">6.</span> <span class="nav-text">/etc/fstab文件字段含义</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看磁盘信息"><span class="nav-number">1.</span> <span class="nav-text">查看磁盘信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区"><span class="nav-number">2.</span> <span class="nav-text">分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看"><span class="nav-number">3.</span> <span class="nav-text">查看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#格式化分区"><span class="nav-number">4.</span> <span class="nav-text">格式化分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载分区"><span class="nav-number">5.</span> <span class="nav-text">挂载分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看信息"><span class="nav-number">6.</span> <span class="nav-text">查看信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置系统开机自动挂载硬盘"><span class="nav-number">7.</span> <span class="nav-text">设置系统开机自动挂载硬盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重启即可"><span class="nav-number">8.</span> <span class="nav-text">重启即可</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#etc-fstab文件字段含义"><span class="nav-number">9.</span> <span class="nav-text">/etc/fstab文件字段含义</span></a></li></ol></div>
             
 
           </div>
