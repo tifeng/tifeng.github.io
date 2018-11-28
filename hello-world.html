@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="Tiffer&#39;s blogs">
 <meta property="og:description" content="1. Hello hexoWelcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-28T08:01:26.602Z">
+<meta property="og:updated_time" content="2018-11-28T13:52:20.436Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo 搭建博客记录">
 <meta name="twitter:description" content="1. Hello hexoWelcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on">
@@ -415,7 +415,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-28 16:01:26" itemprop="dateModified" datetime="2018-11-28T16:01:26+08:00">2018-11-28</time>
+                <time title="修改时间：2018-11-28 21:52:20" itemprop="dateModified" datetime="2018-11-28T21:52:20+08:00">2018-11-28</time>
               
             
           </span>
@@ -663,6 +663,12 @@
 </li>
 </ol>
 <p>参考：<a href="https://joryhe.github.io/2016-05-31-baidu_google_both_tijiao.html" target="_blank" rel="noopener">Github(google提交)+Coding(百度提交)，自适应提交搜索引擎(绝招来啦！)</a></p>
+<h2 id="9-优化url"><a href="#9-优化url" class="headerlink" title="9. 优化url"></a>9. 优化url</h2><p>使用hexo编译的站点打开文章的url是：sitename/year/mounth/day/title四层的结构,这种链接对搜索爬虫是很不友好的。只需要修改<code>_config.yml</code>中的<code>permalink</code></p>
+<p>把原来的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">permalink: :year/:month/:day/:title/</span><br></pre></td></tr></table></figure>
+<p>改成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">permalink: :title.html</span><br></pre></td></tr></table></figure>
+<p>你的文章的url就变成了sitename/title.html</p>
 
       
     </div>
@@ -873,7 +879,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Hello-hexo"><span class="nav-number">1.</span> <span class="nav-text">1. Hello hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Run-server"><span class="nav-number">1.1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-设置categories-tags-about"><span class="nav-number">2.</span> <span class="nav-text">2. 设置categories,tags,about</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Hexo-next主题设置首页不显示全文只显示预览"><span class="nav-number">3.</span> <span class="nav-text">3.Hexo next主题设置首页不显示全文只显示预览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Hexo-统计post阅读次数"><span class="nav-number">4.</span> <span class="nav-text">4. Hexo 统计post阅读次数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-增加网站的PV以及UV功能"><span class="nav-number">5.</span> <span class="nav-text">5. 增加网站的PV以及UV功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-使用valine评论系统"><span class="nav-number">6.</span> <span class="nav-text">6. 使用valine评论系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-同时部署到coding和github"><span class="nav-number">7.</span> <span class="nav-text">7. 同时部署到coding和github</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-提交百度和Google收录"><span class="nav-number">8.</span> <span class="nav-text">8. 提交百度和Google收录</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Hello-hexo"><span class="nav-number">1.</span> <span class="nav-text">1. Hello hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Run-server"><span class="nav-number">1.1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-设置categories-tags-about"><span class="nav-number">2.</span> <span class="nav-text">2. 设置categories,tags,about</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Hexo-next主题设置首页不显示全文只显示预览"><span class="nav-number">3.</span> <span class="nav-text">3.Hexo next主题设置首页不显示全文只显示预览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Hexo-统计post阅读次数"><span class="nav-number">4.</span> <span class="nav-text">4. Hexo 统计post阅读次数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-增加网站的PV以及UV功能"><span class="nav-number">5.</span> <span class="nav-text">5. 增加网站的PV以及UV功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-使用valine评论系统"><span class="nav-number">6.</span> <span class="nav-text">6. 使用valine评论系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-同时部署到coding和github"><span class="nav-number">7.</span> <span class="nav-text">7. 同时部署到coding和github</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-提交百度和Google收录"><span class="nav-number">8.</span> <span class="nav-text">8. 提交百度和Google收录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-优化url"><span class="nav-number">9.</span> <span class="nav-text">9. 优化url</span></a></li></ol></div>
             
 
           </div>
