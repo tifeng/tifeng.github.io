@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="Tiffer&#39;s blogs">
 <meta property="og:description" content="​        vim是linux中的常用的文本编辑器，常常用在linux下的文本编辑。但是其实vim也可以打造成一款IDE用来进行代码开发。作为一个经典的编辑器，通过适当的配置可以成为一个给力的python的IDE。本文主要介绍Linux中如何配置vim环境，以用来进行python代码开发。阅读本文需要先对Vim的基本操作有所了解，不懂的可以先阅读Vim的一些基本认识的资料。 软件准备首先一般">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-24T15:08:48.242Z">
+<meta property="og:updated_time" content="2018-12-24T15:18:20.920Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用vim进行python开发的相关配置">
 <meta name="twitter:description" content="​        vim是linux中的常用的文本编辑器，常常用在linux下的文本编辑。但是其实vim也可以打造成一款IDE用来进行代码开发。作为一个经典的编辑器，通过适当的配置可以成为一个给力的python的IDE。本文主要介绍Linux中如何配置vim环境，以用来进行python代码开发。阅读本文需要先对Vim的基本操作有所了解，不懂的可以先阅读Vim的一些基本认识的资料。 软件准备首先一般">
@@ -398,7 +398,7 @@
                 
               
 
-              <time title="创建时间：2018-12-24 22:46:15 / 修改时间：23:08:48" itemprop="dateCreated datePublished" datetime="2018-12-24T22:46:15+08:00">2018-12-24</time>
+              <time title="创建时间：2018-12-24 22:46:15 / 修改时间：23:18:20" itemprop="dateCreated datePublished" datetime="2018-12-24T22:46:15+08:00">2018-12-24</time>
             
 
             
@@ -498,14 +498,14 @@
 <h1 id="Vim插件安装"><a href="#Vim插件安装" class="headerlink" title="Vim插件安装"></a>Vim插件安装</h1><p>Vim的扩展性很强，可以安装很多插件，使自己使用的更加方便，也有很多插件可以方便进行代码开发。</p>
 <h2 id="Vundle"><a href="#Vundle" class="headerlink" title="Vundle"></a>Vundle</h2><p>Vundle是很常用的插件管理器，可以看作是Vim的pip，可以用来进行插件的安装以及更新。</p>
 <p>安装Vundle:</p>
-<ol>
+<ul>
 <li>代码下载</li>
-</ol>
+</ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim</span><br></pre></td></tr></table></figure>
 <p>该命令将下载Vundle插件管理器，并且放置在了<code>.vim/bundle</code>文件夹中。之后可以通过编辑<code>~/.vimrc</code>文件来进行Vim的配置。<code>~/.vimrc</code>文件可以是Vim的配置文件，所有Vim相关的配置，都在上面进行书写。</p>
-<ol>
+<ul>
 <li>配置<code>~/.vimrc</code></li>
-</ol>
+</ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.vimrc</span><br></pre></td></tr></table></figure>
 <p>添加下面的内容到该文件中。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&quot;vundle</span><br><span class="line">set nocompatible</span><br><span class="line">filetype off</span><br><span class="line"></span><br><span class="line">set rtp+=~/.vim/bundle/Vundle.vim</span><br><span class="line">call vundle#begin()</span><br><span class="line"></span><br><span class="line">Plugin &apos;VundleVim/Vundle.vim&apos;</span><br><span class="line"></span><br><span class="line">call vundle#end()</span><br><span class="line"></span><br><span class="line">filetype plugin indent on    &quot; enables filetype detection</span><br></pre></td></tr></table></figure>
@@ -515,10 +515,12 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:PluginUpdate</span><br><span class="line">:PluginClean</span><br></pre></td></tr></table></figure>
 <h2 id="配色方案"><a href="#配色方案" class="headerlink" title="配色方案"></a>配色方案</h2><p>Vim有很多配置方案可以使用，具体可以网上查看，看到喜欢的，可以下载相应的Vim文件，来进行配置。这里以</p>
 <p><code>molokai</code>配色方案为例。</p>
-<ol>
-<li>下载文件<code>molokai.vim</code>放置到文件夹<code>~/.vim/colors/</code>中。下载的地址为：<code>https://github.com/tomasr/molokai/blob/master/colors/molokai.vim</code></li>
-<li>添加下面的内容到<code>/.vimrc</code>中。</li>
-</ol>
+<ul>
+<li><p>下载文件<code>molokai.vim</code>放置到文件夹<code>~/.vim/colors/</code>中。下载的地址为：<code>https://github.com/tomasr/molokai/blob/master/colors/molokai.vim</code></p>
+</li>
+<li><p>添加下面的内容到<code>/.vimrc</code>中。</p>
+</li>
+</ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">colorscheme molokai</span><br><span class="line">set background=dark</span><br><span class="line">call togglebg#map(&quot;&lt;F5&gt;&quot;)</span><br></pre></td></tr></table></figure>
 <p>上面的语句的作用是，设置了molokai配设方案，使用dark的背景色，通过按键F5进行背景色dark以及light的切换。配置完之后，保存退出。可以发现Vim的颜色已经更改。</p>
 <h2 id="文件浏览"><a href="#文件浏览" class="headerlink" title="文件浏览"></a>文件浏览</h2><p>NERDTree是不错的树形结构文件浏览的常用的插件。同样，在<code>~/.vimrc</code>文件中，加入下面的一行，添加该插件：</p>
