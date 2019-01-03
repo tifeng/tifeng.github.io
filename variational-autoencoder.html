@@ -108,25 +108,27 @@
 
 
 
-  <meta name="description" content="Learning to rank简介pointwiseEach query-document pair in the training set has a numerical orordinal score. The learning-to-rank problem can be seen as a regression or classificationproblem, where each i">
-<meta name="keywords" content="learning to rank,Machine learning">
+  <meta name="description" content="Variatinal autoencoder(VAE)和Generative Adversarial Nets(GAN)是目前两种比较流行的生成式模型。但是这两种模型在模型训练以及原理上是不同的。GAN的思想来自于博弈理论，模型中具有生成式的模型(Generative model)以及辨别式的模型(discriminative model)，模型的目标是找到生成器和辨别器的纳什平衡。而VAE则是通">
+<meta name="keywords" content="variational autoencoder,deep learning,machine learning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Learning to rank">
-<meta property="og:url" content="https://tiffer.cn/Learning to rank.html">
+<meta property="og:title" content="Variational Autoencoder的数学原理">
+<meta property="og:url" content="https://tiffer.cn/variational-autoencoder.html">
 <meta property="og:site_name" content="Tiffer&#39;s blogs">
-<meta property="og:description" content="Learning to rank简介pointwiseEach query-document pair in the training set has a numerical orordinal score. The learning-to-rank problem can be seen as a regression or classificationproblem, where each i">
+<meta property="og:description" content="Variatinal autoencoder(VAE)和Generative Adversarial Nets(GAN)是目前两种比较流行的生成式模型。但是这两种模型在模型训练以及原理上是不同的。GAN的思想来自于博弈理论，模型中具有生成式的模型(Generative model)以及辨别式的模型(discriminative model)，模型的目标是找到生成器和辨别器的纳什平衡。而VAE则是通">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-03T09:15:39.012Z">
+<meta property="og:image" content="https://tiffer.cn/images/vae.png">
+<meta property="og:updated_time" content="2019-01-03T08:37:17.630Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Learning to rank">
-<meta name="twitter:description" content="Learning to rank简介pointwiseEach query-document pair in the training set has a numerical orordinal score. The learning-to-rank problem can be seen as a regression or classificationproblem, where each i">
+<meta name="twitter:title" content="Variational Autoencoder的数学原理">
+<meta name="twitter:description" content="Variatinal autoencoder(VAE)和Generative Adversarial Nets(GAN)是目前两种比较流行的生成式模型。但是这两种模型在模型训练以及原理上是不同的。GAN的思想来自于博弈理论，模型中具有生成式的模型(Generative model)以及辨别式的模型(discriminative model)，模型的目标是找到生成器和辨别器的纳什平衡。而VAE则是通">
+<meta name="twitter:image" content="https://tiffer.cn/images/vae.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://tiffer.cn/Learning to rank.html"/>
+  <link rel="canonical" href="https://tiffer.cn/variational-autoencoder.html"/>
 
 
 
@@ -136,7 +138,7 @@
   };
 </script>
 
-  <title>Learning to rank | Tiffer's blogs</title>
+  <title>Variational Autoencoder的数学原理 | Tiffer's blogs</title>
   
 
 
@@ -356,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://tiffer.cn/Learning to rank.html">
+    <link itemprop="mainEntityOfPage" href="https://tiffer.cn/variational-autoencoder.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tiffer Wu">
@@ -373,7 +375,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Learning to rank
+          <h1 class="post-title" itemprop="name headline">Variational Autoencoder的数学原理
               
             
           </h1>
@@ -398,7 +400,7 @@
                 
               
 
-              <time title="创建时间：2018-05-03 16:55:01 / 修改时间：17:15:39" itemprop="dateCreated datePublished" datetime="2018-05-03T16:55:01+08:00">2018-05-03</time>
+              <time title="创建时间：2019-01-03 16:32:04 / 修改时间：16:37:17" itemprop="dateCreated datePublished" datetime="2019-01-03T16:32:04+08:00">2019-01-03</time>
             
 
             
@@ -420,7 +422,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/IR/" itemprop="url" rel="index"><span itemprop="name">IR</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/neural-network/" itemprop="url" rel="index"><span itemprop="name">neural network</span></a></span>
 
                 
                 
@@ -435,8 +437,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/Learning to rank.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/Learning to rank.html" itemprop="commentCount"></span>
+                <a href="/variational-autoencoder.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/variational-autoencoder.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -444,7 +446,7 @@
 
           
           
-             <span id="/Learning to rank.html" class="leancloud_visitors" data-flag-title="Learning to rank">
+             <span id="/variational-autoencoder.html" class="leancloud_visitors" data-flag-title="Variational Autoencoder的数学原理">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -475,26 +477,72 @@
       
 
       
-        <h1 id="Learning-to-rank"><a href="#Learning-to-rank" class="headerlink" title="Learning to rank"></a>Learning to rank</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="pointwise"><a href="#pointwise" class="headerlink" title="pointwise"></a>pointwise</h3><p>Each query-document pair in the training set has a numerical or<br>ordinal score. The learning-to-rank problem can be seen as a regression or classification<br>problem, where each item is scored independently of the others. An ordering of the items<br>is then obtained by sorting on the scores.</p>
-<p>Advantages:<br>• Existing methodologies and theories on regression or classification are directly supported.<br>Drawbacks:<br>• The relative order between the documents isn’t taken into account, as each document<br>is considered separately.<br>• The pointwise approach overlooks the fact that some documents belong to the same<br>queries. This results in a greater impact of the queries with a large number of associated<br>documents when the distribution of documents per queries varies considerably.<br>• The actual position of each document in the list is not taken into consideration in the<br>loss function.<br>Examples state-of-the-art algoritms: PRank [4], McRank [5]</p>
-<h3 id="pairwise"><a href="#pairwise" class="headerlink" title="pairwise"></a>pairwise</h3><p>The model works as a binary classifier, predicting which document<br>in a given pair is the most relevant with respect to a certain query. The learned preference<br>function can then be embedded as the comparator into a classical sorting algorithm to<br>provide a global ranking of the set of items.</p>
-<p>Advantages:<br>• Like in the pointwise approach, existing methodologies and theories on regression<br>or classification are in large parts supported. Furthermore, the pairwise approach is<br>able to model the relative order between documents.<br>Drawbacks:<br>• Most algorithms don’t take the multiple levels of relevance degrees into consideration.<br>A document pair consisting of two documents labeled “Perfect” and “Bad” is<br>treated in the same way as a document pair consisting of two documents labeled<br>“Good” and “Fair”. This results in a loss of information.<br>1.1. Learning to Rank 7<br>• The unbalanced distribution between documents is a greater issue than in the pointwise<br>approach, as the number of pairs is of quadratic order with respect to the number<br>of documents. The model will therefore be biased towards the queries with a<br>higher number of associated documents.<br>• The pairwise approach is more sensible to noisy data. A single mis-labeled document<br>can result in a huge number of mis-labeled document pairs.<br>• The actual position of each document in the list is not taken into account in the loss<br>function. However, compared to the pointwise approach the relative order between<br>pairs of documents is considered.<br>Examples state-of-the-art algoritms: RankSVM [6], RankBoost [7], RankNet [8], LambdaRank [9],<br>SortNet [10]</p>
-<h3 id="Listwise"><a href="#Listwise" class="headerlink" title="Listwise"></a>Listwise</h3><p>The model takes lists as instances and tries to directly optimize the<br>value of one of the evaluation measures3.<br>Advantages:<br>• The listwise approach addresses the learning-to-rank problem in the most natural<br>way, by taking document lists as instances in the learning process.<br>Drawbacks:<br>• The resulting optimization problem is more challenging than those in the pointwise<br>or pairwise approach, due to the non-continuous and non-differentiable loss function.<br>This often results in higher time complexities.<br>Examples state-of-the-art algoritms: AdaRank [3], ListNet [11]</p>
-<h2 id="learning-to-rank-代码"><a href="#learning-to-rank-代码" class="headerlink" title="learning to rank 代码"></a>learning to rank 代码</h2><ol>
-<li><p>业界首选:LEMUR.Ranklib project incorporates many algorithms in C++</p>
-<p><a href="http://sourceforge.net/projects/lemur/" target="_blank" rel="noopener">http://sourceforge.net/projects/lemur/</a></p>
-</li>
-<li><p><a href="https://bitbucket.org/ilps/lerot" target="_blank" rel="noopener">LEROT</a>: written in python <em>online learning to rank</em> framework.<br>Also there is less detailed, butlonger list of datasets: <a href="https://bitbucket.org/ilps/lerot#rst-header-data" target="_blank" rel="noopener">https://bitbucket.org/ilps/lerot#rst-header-data</a></p>
-</li>
-<li><p><a href="https://github.com/ogrisel/notebooks/blob/master/Learning%20to%20Rank.ipynb" target="_blank" rel="noopener">IPython demo</a> on learning to rank</p>
-</li>
-<li><p>pyltr包含有lambdaRank. <a href="https://github.com/jma127/pyltr" target="_blank" rel="noopener">https://github.com/jma127/pyltr</a></p>
-</li>
-<li><p>rankpy包含有lambdaRank</p>
-</li>
+        <p>Variatinal autoencoder(VAE)和Generative Adversarial Nets(GAN)是目前两种比较流行的生成式模型。但是这两种模型在模型训练以及原理上是不同的。GAN的思想来自于博弈理论，模型中具有生成式的模型(Generative model)以及辨别式的模型(discriminative model)，模型的目标是找到生成器和辨别器的纳什平衡。而VAE则是通过使用贝叶斯推理(Beyesian inference)来对生成式的网络进行训练。此外，VAE可以通过无监督的方法来进行训练，可以用来生成很多有用的数据，如手写字，图片等。</p>
+<h1 id="VAE的思想"><a href="#VAE的思想" class="headerlink" title="VAE的思想"></a>VAE的思想</h1><p>​    VAE是一种生成式的模型，和所有的生成式的模型一样，都涉及到数据样本$X$的概率$P(X)$。通常，$X$是在高维度的空间中。比如，图片中的数据点中，有很多像素，每个像素可以看作是一个维度，生成式的模型中需要对捕捉像素点之间的关系，在一张图片中，哪些像素点的概率高，哪些像素点的概率低，则是在$P(X)$中表现。</p>
+<p>​    生成式的模型怎么来生成新的数据呢? 如果我们有一批样本，我们得到了其中的样本的分布$P(X)$,那么我们从这个样本中进行采样，就可以得到新的样本。因此生成式的模型的目标是为了学习这个$P$。训练这种模型的很多方法中可能可能会有下面三个缺点：</p>
+<ul>
+<li>需要数据的结构进行很强的假设</li>
+<li>需要做很严重的近似，很容易导致陷入次优解</li>
+<li>依赖于计算昂贵的推理过程，如MCMC</li>
+</ul>
+<p>VAE的提出，则是通过神经网络的后向传播进行函数近似(function approximator)，来建立生成式的模型。</p>
+<h1 id="Latent-Variable-Models"><a href="#Latent-Variable-Models" class="headerlink" title="Latent Variable Models"></a>Latent Variable Models</h1><p>首先，VAE中涉及到隐变量(latent variable)这个概念。latent variable是什么呢？如果对latent variable不了解的话，可以通过LDA的例子对latent variable进行了解。LDA(Latent Dirichlet Allocation)隐含狄利克雷分布，是一种主题模型。该模型的思想是，将文档集中每篇文档的主题以概率分布的形式给出，通过文档的主题聚类或者文本分类,可以进行主题聚类或者文本分析等用途。在LDA模型训练完成之后，文档中的词的概率的计算公式为：</p>
+<script type="math/tex; mode=display">
+P(w_{j}|d_{i}) = \sum _{k} P(w_{j}|z_{k}) \cdot  P(z_{k}|d_{i})</script><p>其中，$d$表示文档，$z$表示文档中的主题，$w$表示文档中的一个词。该公式的含义很清晰，一个文档中的词的概率$P(w_j|d_i)$的值等于一个文档中主题的概率$P(w_j|z_k) $和该主题下的主题的概率$P(z_k|di)$的乘积之和。</p>
+<p>在LDA中,latent variable就是这个主题$z$。在这里，使用latent variable的作用是可以通过对文档的原始的词袋的表示，到主题空间的映射，得到文档的主题表示。一个作用是可以得到降维的表示，另外也可以对文档根据主题进行聚类。</p>
+<p>其实，latent variable的作用是通过该变量以及参数$\theta$，来生成数据$X$,也就是最大化生成过程中的$X$的概率。如下面的公式：</p>
+<script type="math/tex; mode=display">
+P(X) = \int {P(X|z;\theta)P(z)dz} \tag{公式1}</script><h1 id="VAE相关公式"><a href="#VAE相关公式" class="headerlink" title="VAE相关公式"></a>VAE相关公式</h1><p>​    VAE和传统的autoencoder如： sparse autoencoders、denoising autoencoders关系不大，VAE的目标其实是最大化公式1。被称为autoencoder的原因是在最终的训练过程中，包含了encoder以及decoder，因此和autoencoder类似。</p>
+<p>​    在公式1中，VAE要处理的问题有（1）怎样去定义latent variable $z$ (2)怎样计算在$z$上的积分。在问题(1)中，VAE的做法是避免直接显式定义$z$，而是假设$z$能从简单的分布如$N(0,I)$中得到（$I$为单位矩阵）。因此在实际中，通过使用神经网络，学习$X$到$z$，以及$z$到$X$的映射的函数,就是分别对应encoder、decoder网络的任务了。问题(2)中的积分计算，则看下面的过程。</p>
+<p>相关符号定义：</p>
+<ol>
+<li>$X$ : 需要建模的数据</li>
+<li>$z$ : 隐变量(latent variable)</li>
+<li>$P(X)$ : 数据的概率分布</li>
+<li>$P(z)$ : 隐变量的概率分布</li>
+<li>$P(X|z)$ : 由隐变量$z$生成的数据的概率分布 </li>
 </ol>
-<h2 id="重要参考网站"><a href="#重要参考网站" class="headerlink" title="重要参考网站"></a>重要参考网站</h2><ol>
-<li><a href="http://arogozhnikov.github.io/2015/06/26/learning-to-rank-software-datasets.html" target="_blank" rel="noopener">learning to rank(software,datasets)</a></li>
+<p>​    实际上，在VAE中通过使用$P(z|X)$来推断$P(z)$,为什么这样呢，因为$z$的维度可能很大，在大多数的$z$中，$P(X|z)$的值可能是0，也就是对生成过程是没有帮助的。因此，希望使用$P(z|X)$来限制隐变量在当前数据$X$下的。$P(z|X)$的计算就是通过使用变分推断（<strong>variational inference</strong>）的方法来进行计算的。<strong>variational inference</strong>和<strong>MCMC</strong>都是贝叶斯推理的两个常用的方法。变分推断的主要思想是把问题变成一个优化问题来解决，实际的分布$P(z|X)$可能很难得到，但是可以通过使用一个简单的分布$Q(z|X)$如高斯分布来进行近似该分布，然后通过计算两个分布的距离，来得到$P$和$Q$之间的差别。计算公式如下所示：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+D_{KL}[Q(z \vert X) \Vert P(z \vert X)] &= \sum_z Q(z \vert X) \, \log \frac{Q(z \vert X)}{P(z \vert X)} \\[10pt]
+&= E_{z\sim Q} \left[ \log \frac{Q(z \vert X)}{P(z \vert X)} \right] \\[10pt]
+&= E_{z \sim Q}[\log Q(z \vert X) - \log P(z \vert X)]
+\end{align} \tag{公式2}</script><p>根据贝叶斯公式有：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+D_{KL}[Q(z \vert X) \Vert P(z \vert X)] &= E_{z \sim Q} \left[ \log Q(z \vert X) - \log \frac{P(X \vert z) P(z)}{P(X)} \right] \\[10pt]
+                                        &= E_{z \sim Q}[\log Q(z \vert X) - (\log P(X \vert z) + \log P(z) - \log P(X))] \\[10pt]
+                                        &= E_{z \sim Q}[\log Q(z \vert X) - \log P(X \vert z) - \log P(z) + \log P(X)]
+
+\end{align}\tag{公式3}</script><p>$P(X)$关于$z$的期望可以提出期望的外面，是因为$P(X)$不依赖于$z$。因此可以得到VAE的目标函数：</p>
+<script type="math/tex; mode=display">
+\log P(X) - D_{KL}[Q(z \vert X) \Vert P(z \vert X)] = E_{z \sim Q} [\log P(X \vert z)] - D_{KL}[Q(z \vert X) \Vert P(z)] \tag{公式4}</script><p>如上面的公式4中，则是VAE的目标函数的公式。公式4的右边和autoencoder的结构是相同的，$Q(z|X)$为encoder,负责将$X$生成得到$z$，而$P(X|z)$则为decoder,负责将$z$重新构造为$X$。</p>
+<h1 id="目标函数的优化过程"><a href="#目标函数的优化过程" class="headerlink" title="目标函数的优化过程"></a>目标函数的优化过程</h1><p>公式4的右边可以通过随机梯度下降的方法来进行优化，目标是最大化<script type="math/tex">E_{z \sim Q} [\log P(X \vert z)]</script>以及最小化<script type="math/tex">D_{KL}[Q(z \vert X) \Vert P(z)]</script> 。其中最大化<script type="math/tex">E_{z \sim Q} [\log P(X \vert z)]</script>可以通过常见的极大似然估计的方法来得到。关键难计算的是<script type="math/tex">D_{KL}[Q(z \vert X) \Vert P(z)]</script>这项，实际上在VAE中假设了<script type="math/tex">P(z) = N(0,1)</script>，此外希望<script type="math/tex">Q(z|X)</script>是均值，方差分别为<script type="math/tex">\mu (X)</script>,<script type="math/tex">\Sigma(X)</script>的高斯分布。在这个假设之下，两个高斯分布的KL距离的计算如下：</p>
+<script type="math/tex; mode=display">
+D_{KL}[N(\mu(X), \Sigma(X)) \Vert N(0, 1)] = \frac{1}{2} \, \left( \textrm{tr}(\Sigma(X)) + \mu(X)^T\mu(X) - k - \log \, \det(\Sigma(X)) \right) \tag{公式5}</script><p>其中$k$为分布的维度，$tr(X)$是trace函数如矩阵$X$的对角元素的和。对角矩阵的行列式为对角线的乘积。我们可以把$\Sigma(X)$实现为一个向量，因为它是一个对角矩阵，因此有下面的公式：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+
+D_{KL}[N(\mu(X), \Sigma(X)) \Vert N(0, 1)] &= \frac{1}{2} \, \left( \sum_k \Sigma(X) + \sum_k \mu^2(X) - \sum_k 1 - \log \, \prod_k \Sigma(X) \right) \\[10pt]
+                                      &= \frac{1}{2} \, \left( \sum_k \Sigma(X) + \sum_k \mu^2(X) - \sum_k 1 - \sum_k \log \Sigma(X) \right) \\[10pt]
+                                      &= \frac{1}{2} \, \sum_k \left( \Sigma(X) + \mu^2(X) - 1 - \log \Sigma(X) \right)
+\end{align}\tag{公式6}</script><p>实际上，使用$log\Sigma(X)$来进行计算更加容易，因此最终的KL距离的计算公式为：</p>
+<script type="math/tex; mode=display">
+D_{KL}[N(\mu(X), \Sigma(X)) \Vert N(0, 1)] = \frac{1}{2} \sum_k \left( \exp(log\Sigma(X)) + \mu^2(X) - 1 - log\Sigma(X) \right)\tag{公式7}</script><h1 id="reparameterization-trick"><a href="#reparameterization-trick" class="headerlink" title="reparameterization trick"></a>reparameterization trick</h1><p>在上面的公式4为VAE的目标函数，其中为了计算<script type="math/tex">E_{z \sim Q} [\log P(X \vert z)]</script>，可以通过从数据集中使用采样足够多的<script type="math/tex">z</script>样本，然后通过在数据集<script type="math/tex">D</script>中的不同样本集<script type="math/tex">X</script>中使用随机梯度下降的方法。所以完整的优化函数是：</p>
+<script type="math/tex; mode=display">
+E_{X \sim D}[\log P(X) - D_{KL}[Q(z \vert X) \Vert P(z \vert X)]] = E_{X \sim D}[E_{z \sim Q} [\log P(X \vert z)] - D_{KL}[Q(z \vert X) \Vert P(z)]] \tag{公式8}</script><p>在使用梯度下降的时候，通过从<script type="math/tex">X</script>中采样的值，然后通过<script type="math/tex">Q(z|X)</script>计算得到<script type="math/tex">z</script>，然后计算<script type="math/tex">\log P(X \vert z) - D_{KL}[Q(z \vert X) \Vert P(z)]</script>的梯度。最终计算的时候，则是使用很多采样的<script type="math/tex">X</script>和<script type="math/tex">z</script>值计算得到的梯度值的平均值作为梯度值。但是这样的计算中，<script type="math/tex">\log P(X \vert z)</script>中没有对<script type="math/tex">Q</script>的参数的依赖，实际公式<script type="math/tex">E_{z \sim Q} [\log P(X \vert z)]</script></p>
+<p>既依赖于<script type="math/tex">P</script>的参数，也依赖<script type="math/tex">Q</script>的参数。这样会导致在<script type="math/tex">Q</script>网络中缺少梯度，因此为了解决这个问题，使用<strong>reparameterization trick</strong>这个方法。该方法的做法是，给定<script type="math/tex">Q(z|X)</script>的均值<script type="math/tex">\mu (X)</script>和协方差<script type="math/tex">\Sigma (X)</script>,为了<script type="math/tex">z</script>能从<script type="math/tex">N(\mu (X), \Sigma (X))</script>中采样，可以先从<script type="math/tex">\epsilon \sim N(0, 1)</script>中采样，然后计算：</p>
+<script type="math/tex; mode=display">
+z = \mu(X) + \Sigma^{\frac{1}{2}}(X) *\epsilon \tag{公式8}</script><p>这样做的原理是，<script type="math/tex">x \sim N(\mu, \sigma ^ 2)</script>能通过<script type="math/tex">\epsilon \sim  N(0,1)</script>的变换来得到，只要令<script type="math/tex">x = \mu + \sigma * \epsilon</script>即可。</p>
+<p>因此实际上最终计算的梯度是下面的公式：</p>
+<script type="math/tex; mode=display">
+E_{X \sim D}[E_{\epsilon \sim N(0,1)} [\log P(X \vert z = \mu (X) + \Sigma^{\frac{1}{2}}(X)*\epsilon)] - D_{KL}[Q(z \vert X) \Vert P(z)]] \tag{公式8}</script><p>如下图中所示，右边是使用了<strong>reparameterization trick</strong>这个方法的，而左边没有。</p>
+<p><img src="/images/vae.png" alt="1546504026146"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>文中主要介绍了VAE的数学原理，其中大部分是出自链接中的内容以及自己的理解。其中，有很多知识，因为个人水平有限，难免有错误，不正确的地方欢迎指出。</p>
+<h1 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h1><ol>
+<li><a href="https://wiseodd.github.io/techblog/2016/12/10/variational-autoencoder/" target="_blank" rel="noopener">Variational Autoencoder: Intuition and Implementation</a></li>
+<li><a href="https://arxiv.org/pdf/1606.05908.pdf" target="_blank" rel="noopener">Tutorial on Variational Autoencoders</a></li>
 </ol>
 
       
@@ -548,9 +596,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/learning-to-rank/" rel="tag"># learning to rank</a>
+            <a href="/tags/variational-autoencoder/" rel="tag"># variational autoencoder</a>
           
-            <a href="/tags/Machine-learning/" rel="tag"># Machine learning</a>
+            <a href="/tags/deep-learning/" rel="tag"># deep learning</a>
+          
+            <a href="/tags/machine-learning/" rel="tag"># machine learning</a>
           
         </div>
       
@@ -563,8 +613,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/hello-world.html" rel="next" title="Hexo 搭建博客记录">
-                <i class="fa fa-chevron-left"></i> Hexo 搭建博客记录
+              <a href="/vim_with_python.html" rel="next" title="使用vim进行python开发的相关配置">
+                <i class="fa fa-chevron-left"></i> 使用vim进行python开发的相关配置
               </a>
             
           </div>
@@ -572,10 +622,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/组合数求模计算.html" rel="prev" title="组合数求模">
-                组合数求模 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -753,7 +799,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Learning-to-rank"><span class="nav-number">1.</span> <span class="nav-text">Learning to rank</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pointwise"><span class="nav-number">1.1.1.</span> <span class="nav-text">pointwise</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pairwise"><span class="nav-number">1.1.2.</span> <span class="nav-text">pairwise</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Listwise"><span class="nav-number">1.1.3.</span> <span class="nav-text">Listwise</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#learning-to-rank-代码"><span class="nav-number">1.2.</span> <span class="nav-text">learning to rank 代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重要参考网站"><span class="nav-number">1.3.</span> <span class="nav-text">重要参考网站</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#VAE的思想"><span class="nav-number">1.</span> <span class="nav-text">VAE的思想</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Latent-Variable-Models"><span class="nav-number">2.</span> <span class="nav-text">Latent Variable Models</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VAE相关公式"><span class="nav-number">3.</span> <span class="nav-text">VAE相关公式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#目标函数的优化过程"><span class="nav-number">4.</span> <span class="nav-text">目标函数的优化过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reparameterization-trick"><span class="nav-number">5.</span> <span class="nav-text">reparameterization trick</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考链接："><span class="nav-number">7.</span> <span class="nav-text">参考链接：</span></a></li></ol></div>
             
 
           </div>
