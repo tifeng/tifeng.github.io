@@ -117,7 +117,7 @@
 <meta property="og:description" content="Variatinal autoencoder(VAE)和Generative Adversarial Nets(GAN)是目前两种比较流行的生成式模型。但是这两种模型在模型训练以及原理上是不同的。GAN的思想来自于博弈理论，模型中具有生成式的模型(Generative model)以及辨别式的模型(discriminative model)，模型的目标是找到生成器和辨别器的纳什平衡。而VAE则是通">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://tiffer.cn/images/vae.png">
-<meta property="og:updated_time" content="2019-01-03T13:18:07.209Z">
+<meta property="og:updated_time" content="2019-01-03T13:19:19.359Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Variational Autoencoder的数学原理">
 <meta name="twitter:description" content="Variatinal autoencoder(VAE)和Generative Adversarial Nets(GAN)是目前两种比较流行的生成式模型。但是这两种模型在模型训练以及原理上是不同的。GAN的思想来自于博弈理论，模型中具有生成式的模型(Generative model)以及辨别式的模型(discriminative model)，模型的目标是找到生成器和辨别器的纳什平衡。而VAE则是通">
@@ -400,7 +400,7 @@
                 
               
 
-              <time title="创建时间：2019-01-03 16:32:04 / 修改时间：21:18:07" itemprop="dateCreated datePublished" datetime="2019-01-03T16:32:04+08:00">2019-01-03</time>
+              <time title="创建时间：2019-01-03 16:32:04 / 修改时间：21:19:19" itemprop="dateCreated datePublished" datetime="2019-01-03T16:32:04+08:00">2019-01-03</time>
             
 
             
@@ -504,11 +504,11 @@ P(X) = \int {P(X|z;\theta)P(z)dz} \tag{公式1}</script><h1 id="VAE相关公式"
 </ol>
 <p>​    实际上，在VAE中通过使用<script type="math/tex">P(z|X)</script>来推断<script type="math/tex">P(z)</script>,为什么这样呢，因为<script type="math/tex">z</script>的维度可能很大，在大多数的<script type="math/tex">z</script>中，<script type="math/tex">P(X|z)</script>的值可能是0，也就是对生成过程是没有帮助的。因此，希望使用<script type="math/tex">P(z|X)</script>来限制隐变量在当前数据<script type="math/tex">X</script>下的。<script type="math/tex">P(z|X)</script>的计算就是通过使用变分推断（<strong>variational inference</strong>）的方法来进行计算的。<strong>variational inference</strong>和<strong>MCMC</strong>都是贝叶斯推理的两个常用的方法。变分推断的主要思想是把问题变成一个优化问题来解决，实际的分布<script type="math/tex">P(z|X)</script>可能很难得到，但是可以通过使用一个简单的分布<script type="math/tex">Q(z|X)</script>如高斯分布来进行近似该分布，然后通过计算两个分布的距离，来得到<script type="math/tex">P</script>和<script type="math/tex">Q</script>之间的差别。计算公式如下所示：</p>
 <script type="math/tex; mode=display">
-\begin{align}
+\begin{align*}
 D_{KL}[Q(z \vert X) \Vert P(z \vert X)] &= \sum_z Q(z \vert X) \, \log \frac{Q(z \vert X)}{P(z \vert X)} \\[10pt]
 &= E_{z\sim Q} \left[ \log \frac{Q(z \vert X)}{P(z \vert X)} \right] \\[10pt]
 &= E_{z \sim Q}[\log Q(z \vert X) - \log P(z \vert X)]
-\end{align} \tag{公式2}</script><p>根据贝叶斯公式有：</p>
+\end{align*} \tag{公式2}</script><p>根据贝叶斯公式有：</p>
 <script type="math/tex; mode=display">
 \begin{align*}
 D_{KL}[Q(z \vert X) \Vert P(z \vert X)] &= E_{z \sim Q} \left[ \log Q(z \vert X) - \log \frac{P(X \vert z) P(z)}{P(X)} \right] \\[10pt]
