@@ -117,7 +117,7 @@
 <meta property="og:description" content="Variatinal autoencoder(VAE)和Generative Adversarial Nets(GAN)是目前两种比较流行的生成式模型。但是这两种模型在模型训练以及原理上是不同的。GAN的思想来自于博弈理论，模型中具有生成式的模型(Generative model)以及辨别式的模型(discriminative model)，模型的目标是找到生成器和辨别器的纳什平衡。而VAE则是通">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://tiffer.cn/images/vae.png">
-<meta property="og:updated_time" content="2019-01-03T08:37:17.630Z">
+<meta property="og:updated_time" content="2019-01-03T08:42:31.997Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Variational Autoencoder的数学原理">
 <meta name="twitter:description" content="Variatinal autoencoder(VAE)和Generative Adversarial Nets(GAN)是目前两种比较流行的生成式模型。但是这两种模型在模型训练以及原理上是不同的。GAN的思想来自于博弈理论，模型中具有生成式的模型(Generative model)以及辨别式的模型(discriminative model)，模型的目标是找到生成器和辨别器的纳什平衡。而VAE则是通">
@@ -400,7 +400,7 @@
                 
               
 
-              <time title="创建时间：2019-01-03 16:32:04 / 修改时间：16:37:17" itemprop="dateCreated datePublished" datetime="2019-01-03T16:32:04+08:00">2019-01-03</time>
+              <time title="创建时间：2019-01-03 16:32:04 / 修改时间：16:42:31" itemprop="dateCreated datePublished" datetime="2019-01-03T16:32:04+08:00">2019-01-03</time>
             
 
             
@@ -478,8 +478,8 @@
 
       
         <p>Variatinal autoencoder(VAE)和Generative Adversarial Nets(GAN)是目前两种比较流行的生成式模型。但是这两种模型在模型训练以及原理上是不同的。GAN的思想来自于博弈理论，模型中具有生成式的模型(Generative model)以及辨别式的模型(discriminative model)，模型的目标是找到生成器和辨别器的纳什平衡。而VAE则是通过使用贝叶斯推理(Beyesian inference)来对生成式的网络进行训练。此外，VAE可以通过无监督的方法来进行训练，可以用来生成很多有用的数据，如手写字，图片等。</p>
-<h1 id="VAE的思想"><a href="#VAE的思想" class="headerlink" title="VAE的思想"></a>VAE的思想</h1><p>​    VAE是一种生成式的模型，和所有的生成式的模型一样，都涉及到数据样本$X$的概率$P(X)$。通常，$X$是在高维度的空间中。比如，图片中的数据点中，有很多像素，每个像素可以看作是一个维度，生成式的模型中需要对捕捉像素点之间的关系，在一张图片中，哪些像素点的概率高，哪些像素点的概率低，则是在$P(X)$中表现。</p>
-<p>​    生成式的模型怎么来生成新的数据呢? 如果我们有一批样本，我们得到了其中的样本的分布$P(X)$,那么我们从这个样本中进行采样，就可以得到新的样本。因此生成式的模型的目标是为了学习这个$P$。训练这种模型的很多方法中可能可能会有下面三个缺点：</p>
+<h1 id="VAE的思想"><a href="#VAE的思想" class="headerlink" title="VAE的思想"></a>VAE的思想</h1><p>​    VAE是一种生成式的模型，和所有的生成式的模型一样，都涉及到数据样本<script type="math/tex">X</script>的概率<script type="math/tex">P(X)</script>。通常，<script type="math/tex">X</script>是在高维度的空间中。比如，图片中的数据点中，有很多像素，每个像素可以看作是一个维度，生成式的模型中需要对捕捉像素点之间的关系，在一张图片中，哪些像素点的概率高，哪些像素点的概率低，则是在<script type="math/tex">P(X)</script>中表现。</p>
+<p>​    生成式的模型怎么来生成新的数据呢? 如果我们有一批样本，我们得到了其中的样本的分布<script type="math/tex">P(X)</script>,那么我们从这个样本中进行采样，就可以得到新的样本。因此生成式的模型的目标是为了学习这个<script type="math/tex">P</script>。训练这种模型的很多方法中可能可能会有下面三个缺点：</p>
 <ul>
 <li>需要数据的结构进行很强的假设</li>
 <li>需要做很严重的近似，很容易导致陷入次优解</li>
@@ -488,21 +488,21 @@
 <p>VAE的提出，则是通过神经网络的后向传播进行函数近似(function approximator)，来建立生成式的模型。</p>
 <h1 id="Latent-Variable-Models"><a href="#Latent-Variable-Models" class="headerlink" title="Latent Variable Models"></a>Latent Variable Models</h1><p>首先，VAE中涉及到隐变量(latent variable)这个概念。latent variable是什么呢？如果对latent variable不了解的话，可以通过LDA的例子对latent variable进行了解。LDA(Latent Dirichlet Allocation)隐含狄利克雷分布，是一种主题模型。该模型的思想是，将文档集中每篇文档的主题以概率分布的形式给出，通过文档的主题聚类或者文本分类,可以进行主题聚类或者文本分析等用途。在LDA模型训练完成之后，文档中的词的概率的计算公式为：</p>
 <script type="math/tex; mode=display">
-P(w_{j}|d_{i}) = \sum _{k} P(w_{j}|z_{k}) \cdot  P(z_{k}|d_{i})</script><p>其中，$d$表示文档，$z$表示文档中的主题，$w$表示文档中的一个词。该公式的含义很清晰，一个文档中的词的概率$P(w_j|d_i)$的值等于一个文档中主题的概率$P(w_j|z_k) $和该主题下的主题的概率$P(z_k|di)$的乘积之和。</p>
-<p>在LDA中,latent variable就是这个主题$z$。在这里，使用latent variable的作用是可以通过对文档的原始的词袋的表示，到主题空间的映射，得到文档的主题表示。一个作用是可以得到降维的表示，另外也可以对文档根据主题进行聚类。</p>
-<p>其实，latent variable的作用是通过该变量以及参数$\theta$，来生成数据$X$,也就是最大化生成过程中的$X$的概率。如下面的公式：</p>
+P(w_{j}|d_{i}) = \sum _{k} P(w_{j}|z_{k}) \cdot  P(z_{k}|d_{i})</script><p>其中，<script type="math/tex">d</script>表示文档，<script type="math/tex">z</script>表示文档中的主题，<script type="math/tex">w</script>表示文档中的一个词。该公式的含义很清晰，一个文档中的词的概率<script type="math/tex">P(w_j|d_i)</script>的值等于一个文档中主题的概率<script type="math/tex">P(w_j|z_k)</script>和该主题下的主题的概率<script type="math/tex">P(z_k|di)</script>的乘积之和。</p>
+<p>在LDA中,latent variable就是这个主题<script type="math/tex">z</script>。在这里，使用latent variable的作用是可以通过对文档的原始的词袋的表示，到主题空间的映射，得到文档的主题表示。一个作用是可以得到降维的表示，另外也可以对文档根据主题进行聚类。</p>
+<p>其实，latent variable的作用是通过该变量以及参数<script type="math/tex">\theta</script>，来生成数据<script type="math/tex">X</script>,也就是最大化生成过程中的<script type="math/tex">X</script>的概率。如下面的公式：</p>
 <script type="math/tex; mode=display">
 P(X) = \int {P(X|z;\theta)P(z)dz} \tag{公式1}</script><h1 id="VAE相关公式"><a href="#VAE相关公式" class="headerlink" title="VAE相关公式"></a>VAE相关公式</h1><p>​    VAE和传统的autoencoder如： sparse autoencoders、denoising autoencoders关系不大，VAE的目标其实是最大化公式1。被称为autoencoder的原因是在最终的训练过程中，包含了encoder以及decoder，因此和autoencoder类似。</p>
-<p>​    在公式1中，VAE要处理的问题有（1）怎样去定义latent variable $z$ (2)怎样计算在$z$上的积分。在问题(1)中，VAE的做法是避免直接显式定义$z$，而是假设$z$能从简单的分布如$N(0,I)$中得到（$I$为单位矩阵）。因此在实际中，通过使用神经网络，学习$X$到$z$，以及$z$到$X$的映射的函数,就是分别对应encoder、decoder网络的任务了。问题(2)中的积分计算，则看下面的过程。</p>
+<p>​    在公式1中，VAE要处理的问题有（1）怎样去定义latent variable <script type="math/tex">z</script> (2)怎样计算在<script type="math/tex">z</script>上的积分。在问题(1)中，VAE的做法是避免直接显式定义<script type="math/tex">z</script>，而是假设<script type="math/tex">z</script>能从简单的分布如<script type="math/tex">N(0,I)</script>中得到（<script type="math/tex">I</script>为单位矩阵）。因此在实际中，通过使用神经网络，学习<script type="math/tex">X</script>到<script type="math/tex">z</script>，以及<script type="math/tex">z</script>到<script type="math/tex">X</script>的映射的函数,就是分别对应encoder、decoder网络的任务了。问题(2)中的积分计算，则看下面的过程。</p>
 <p>相关符号定义：</p>
 <ol>
-<li>$X$ : 需要建模的数据</li>
-<li>$z$ : 隐变量(latent variable)</li>
-<li>$P(X)$ : 数据的概率分布</li>
-<li>$P(z)$ : 隐变量的概率分布</li>
-<li>$P(X|z)$ : 由隐变量$z$生成的数据的概率分布 </li>
+<li><script type="math/tex">X</script> : 需要建模的数据</li>
+<li><script type="math/tex">z</script> : 隐变量(latent variable)</li>
+<li><script type="math/tex">P(X)</script> : 数据的概率分布</li>
+<li><script type="math/tex">P(z)</script> : 隐变量的概率分布</li>
+<li><script type="math/tex">P(X|z)</script> : 由隐变量<script type="math/tex">z</script>生成的数据的概率分布 </li>
 </ol>
-<p>​    实际上，在VAE中通过使用$P(z|X)$来推断$P(z)$,为什么这样呢，因为$z$的维度可能很大，在大多数的$z$中，$P(X|z)$的值可能是0，也就是对生成过程是没有帮助的。因此，希望使用$P(z|X)$来限制隐变量在当前数据$X$下的。$P(z|X)$的计算就是通过使用变分推断（<strong>variational inference</strong>）的方法来进行计算的。<strong>variational inference</strong>和<strong>MCMC</strong>都是贝叶斯推理的两个常用的方法。变分推断的主要思想是把问题变成一个优化问题来解决，实际的分布$P(z|X)$可能很难得到，但是可以通过使用一个简单的分布$Q(z|X)$如高斯分布来进行近似该分布，然后通过计算两个分布的距离，来得到$P$和$Q$之间的差别。计算公式如下所示：</p>
+<p>​    实际上，在VAE中通过使用<script type="math/tex">P(z|X)</script>来推断<script type="math/tex">P(z)</script>,为什么这样呢，因为<script type="math/tex">z</script>的维度可能很大，在大多数的<script type="math/tex">z</script>中，<script type="math/tex">P(X|z)</script>的值可能是0，也就是对生成过程是没有帮助的。因此，希望使用<script type="math/tex">P(z|X)</script>来限制隐变量在当前数据<script type="math/tex">X</script>下的。<script type="math/tex">P(z|X)</script>的计算就是通过使用变分推断（<strong>variational inference</strong>）的方法来进行计算的。<strong>variational inference</strong>和<strong>MCMC</strong>都是贝叶斯推理的两个常用的方法。变分推断的主要思想是把问题变成一个优化问题来解决，实际的分布<script type="math/tex">P(z|X)</script>可能很难得到，但是可以通过使用一个简单的分布<script type="math/tex">Q(z|X)</script>如高斯分布来进行近似该分布，然后通过计算两个分布的距离，来得到<script type="math/tex">P</script>和<script type="math/tex">Q</script>之间的差别。计算公式如下所示：</p>
 <script type="math/tex; mode=display">
 \begin{align}
 D_{KL}[Q(z \vert X) \Vert P(z \vert X)] &= \sum_z Q(z \vert X) \, \log \frac{Q(z \vert X)}{P(z \vert X)} \\[10pt]
@@ -515,24 +515,30 @@ D_{KL}[Q(z \vert X) \Vert P(z \vert X)] &= E_{z \sim Q} \left[ \log Q(z \vert X)
                                         &= E_{z \sim Q}[\log Q(z \vert X) - (\log P(X \vert z) + \log P(z) - \log P(X))] \\[10pt]
                                         &= E_{z \sim Q}[\log Q(z \vert X) - \log P(X \vert z) - \log P(z) + \log P(X)]
 
-\end{align}\tag{公式3}</script><p>$P(X)$关于$z$的期望可以提出期望的外面，是因为$P(X)$不依赖于$z$。因此可以得到VAE的目标函数：</p>
+\end{align}\tag{公式3}</script><script type="math/tex; mode=display">P(X)$$关于$$z$$的期望可以提出期望的外面，是因为$$P(X)$$不依赖于$$z$$。因此可以得到VAE的目标函数：</script><p>\log P(X) - D_{KL}[Q(z \vert X) \Vert P(z \vert X)] = E_{z \sim Q} [\log P(X \vert z)] - D_{KL}[Q(z \vert X) \Vert P(z)] \tag{公式4}</p>
 <script type="math/tex; mode=display">
-\log P(X) - D_{KL}[Q(z \vert X) \Vert P(z \vert X)] = E_{z \sim Q} [\log P(X \vert z)] - D_{KL}[Q(z \vert X) \Vert P(z)] \tag{公式4}</script><p>如上面的公式4中，则是VAE的目标函数的公式。公式4的右边和autoencoder的结构是相同的，$Q(z|X)$为encoder,负责将$X$生成得到$z$，而$P(X|z)$则为decoder,负责将$z$重新构造为$X$。</p>
-<h1 id="目标函数的优化过程"><a href="#目标函数的优化过程" class="headerlink" title="目标函数的优化过程"></a>目标函数的优化过程</h1><p>公式4的右边可以通过随机梯度下降的方法来进行优化，目标是最大化<script type="math/tex">E_{z \sim Q} [\log P(X \vert z)]</script>以及最小化<script type="math/tex">D_{KL}[Q(z \vert X) \Vert P(z)]</script> 。其中最大化<script type="math/tex">E_{z \sim Q} [\log P(X \vert z)]</script>可以通过常见的极大似然估计的方法来得到。关键难计算的是<script type="math/tex">D_{KL}[Q(z \vert X) \Vert P(z)]</script>这项，实际上在VAE中假设了<script type="math/tex">P(z) = N(0,1)</script>，此外希望<script type="math/tex">Q(z|X)</script>是均值，方差分别为<script type="math/tex">\mu (X)</script>,<script type="math/tex">\Sigma(X)</script>的高斯分布。在这个假设之下，两个高斯分布的KL距离的计算如下：</p>
-<script type="math/tex; mode=display">
-D_{KL}[N(\mu(X), \Sigma(X)) \Vert N(0, 1)] = \frac{1}{2} \, \left( \textrm{tr}(\Sigma(X)) + \mu(X)^T\mu(X) - k - \log \, \det(\Sigma(X)) \right) \tag{公式5}</script><p>其中$k$为分布的维度，$tr(X)$是trace函数如矩阵$X$的对角元素的和。对角矩阵的行列式为对角线的乘积。我们可以把$\Sigma(X)$实现为一个向量，因为它是一个对角矩阵，因此有下面的公式：</p>
-<script type="math/tex; mode=display">
-\begin{align}
+如上面的公式4中，则是VAE的目标函数的公式。公式4的右边和autoencoder的结构是相同的，$$Q(z|X)$$为encoder,负责将$$X$$生成得到$$z$$，而$$P(X|z)$$则为decoder,负责将$$z$$重新构造为$$X$$。
 
-D_{KL}[N(\mu(X), \Sigma(X)) \Vert N(0, 1)] &= \frac{1}{2} \, \left( \sum_k \Sigma(X) + \sum_k \mu^2(X) - \sum_k 1 - \log \, \prod_k \Sigma(X) \right) \\[10pt]
-                                      &= \frac{1}{2} \, \left( \sum_k \Sigma(X) + \sum_k \mu^2(X) - \sum_k 1 - \sum_k \log \Sigma(X) \right) \\[10pt]
-                                      &= \frac{1}{2} \, \sum_k \left( \Sigma(X) + \mu^2(X) - 1 - \log \Sigma(X) \right)
-\end{align}\tag{公式6}</script><p>实际上，使用$log\Sigma(X)$来进行计算更加容易，因此最终的KL距离的计算公式为：</p>
+
+
+# 目标函数的优化过程
+
+公式4的右边可以通过随机梯度下降的方法来进行优化，目标是最大化$$E_{z \sim Q} [\log P(X \vert z)]$$以及最小化$$D_{KL}[Q(z \vert X) \Vert P(z)]$$ 。其中最大化$$E_{z \sim Q} [\log P(X \vert z)]$$可以通过常见的极大似然估计的方法来得到。关键难计算的是$$D_{KL}[Q(z \vert X) \Vert P(z)]$$这项，实际上在VAE中假设了$$P(z) = N(0,1)$$，此外希望$$Q(z|X)$$是均值，方差分别为$$\mu (X) $$,$$\Sigma(X)$$的高斯分布。在这个假设之下，两个高斯分布的KL距离的计算如下：</script><p>D_{KL}[N(\mu(X), \Sigma(X)) \Vert N(0, 1)] = \frac{1}{2} \, \left( \textrm{tr}(\Sigma(X)) + \mu(X)^T\mu(X) - k - \log \, \det(\Sigma(X)) \right) \tag{公式5}</p>
 <script type="math/tex; mode=display">
-D_{KL}[N(\mu(X), \Sigma(X)) \Vert N(0, 1)] = \frac{1}{2} \sum_k \left( \exp(log\Sigma(X)) + \mu^2(X) - 1 - log\Sigma(X) \right)\tag{公式7}</script><h1 id="reparameterization-trick"><a href="#reparameterization-trick" class="headerlink" title="reparameterization trick"></a>reparameterization trick</h1><p>在上面的公式4为VAE的目标函数，其中为了计算<script type="math/tex">E_{z \sim Q} [\log P(X \vert z)]</script>，可以通过从数据集中使用采样足够多的<script type="math/tex">z</script>样本，然后通过在数据集<script type="math/tex">D</script>中的不同样本集<script type="math/tex">X</script>中使用随机梯度下降的方法。所以完整的优化函数是：</p>
+其中$$k$$为分布的维度，$$tr(X)$$是trace函数如矩阵$$X$$的对角元素的和。对角矩阵的行列式为对角线的乘积。我们可以把$$\Sigma(X)$$实现为一个向量，因为它是一个对角矩阵，因此有下面的公式：</script><p>\begin{align}</p>
+<p>D_{KL}[N(\mu(X), \Sigma(X)) \Vert N(0, 1)] &amp;= \frac{1}{2} \, \left( \sum_k \Sigma(X) + \sum_k \mu^2(X) - \sum_k 1 - \log \, \prod_k \Sigma(X) \right) \[10pt]<br>                                      &amp;= \frac{1}{2} \, \left( \sum_k \Sigma(X) + \sum_k \mu^2(X) - \sum_k 1 - \sum_k \log \Sigma(X) \right) \[10pt]<br>                                      &amp;= \frac{1}{2} \, \sum_k \left( \Sigma(X) + \mu^2(X) - 1 - \log \Sigma(X) \right)<br>\end{align}\tag{公式6}</p>
 <script type="math/tex; mode=display">
-E_{X \sim D}[\log P(X) - D_{KL}[Q(z \vert X) \Vert P(z \vert X)]] = E_{X \sim D}[E_{z \sim Q} [\log P(X \vert z)] - D_{KL}[Q(z \vert X) \Vert P(z)]] \tag{公式8}</script><p>在使用梯度下降的时候，通过从<script type="math/tex">X</script>中采样的值，然后通过<script type="math/tex">Q(z|X)</script>计算得到<script type="math/tex">z</script>，然后计算<script type="math/tex">\log P(X \vert z) - D_{KL}[Q(z \vert X) \Vert P(z)]</script>的梯度。最终计算的时候，则是使用很多采样的<script type="math/tex">X</script>和<script type="math/tex">z</script>值计算得到的梯度值的平均值作为梯度值。但是这样的计算中，<script type="math/tex">\log P(X \vert z)</script>中没有对<script type="math/tex">Q</script>的参数的依赖，实际公式<script type="math/tex">E_{z \sim Q} [\log P(X \vert z)]</script></p>
-<p>既依赖于<script type="math/tex">P</script>的参数，也依赖<script type="math/tex">Q</script>的参数。这样会导致在<script type="math/tex">Q</script>网络中缺少梯度，因此为了解决这个问题，使用<strong>reparameterization trick</strong>这个方法。该方法的做法是，给定<script type="math/tex">Q(z|X)</script>的均值<script type="math/tex">\mu (X)</script>和协方差<script type="math/tex">\Sigma (X)</script>,为了<script type="math/tex">z</script>能从<script type="math/tex">N(\mu (X), \Sigma (X))</script>中采样，可以先从<script type="math/tex">\epsilon \sim N(0, 1)</script>中采样，然后计算：</p>
+实际上，使用$$log\Sigma(X)$$来进行计算更加容易，因此最终的KL距离的计算公式为：</script><p>D_{KL}[N(\mu(X), \Sigma(X)) \Vert N(0, 1)] = \frac{1}{2} \sum_k \left( \exp(log\Sigma(X)) + \mu^2(X) - 1 - log\Sigma(X) \right)\tag{公式7}</p>
+<script type="math/tex; mode=display">
+
+
+
+
+# reparameterization trick
+
+在上面的公式4为VAE的目标函数，其中为了计算$$E_{z \sim Q} [\log P(X \vert z)]$$，可以通过从数据集中使用采样足够多的$$z$$样本，然后通过在数据集$$D$$中的不同样本集$$X$$中使用随机梯度下降的方法。所以完整的优化函数是：</script><p>E_{X \sim D}[\log P(X) - D_{KL}[Q(z \vert X) \Vert P(z \vert X)]] = E_{X \sim D}[E_{z \sim Q} [\log P(X \vert z)] - D_{KL}[Q(z \vert X) \Vert P(z)]] \tag{公式8}</p>
+<script type="math/tex; mode=display">
+在使用梯度下降的时候，通过从$$X$$中采样的值，然后通过$$Q(z|X)$$计算得到$$z$$，然后计算$$\log P(X \vert z) - D_{KL}[Q(z \vert X) \Vert P(z)]$$的梯度。最终计算的时候，则是使用很多采样的$$X$$和$$z$$值计算得到的梯度值的平均值作为梯度值。但是这样的计算中，$$\log P(X \vert z) $$中没有对$$Q$$的参数的依赖，实际公式$$E_{z \sim Q} [\log P(X \vert z)]</script><p>既依赖于<script type="math/tex">P</script>的参数，也依赖<script type="math/tex">Q</script>的参数。这样会导致在<script type="math/tex">Q</script>网络中缺少梯度，因此为了解决这个问题，使用<strong>reparameterization trick</strong>这个方法。该方法的做法是，给定<script type="math/tex">Q(z|X)</script>的均值<script type="math/tex">\mu (X)</script>和协方差<script type="math/tex">\Sigma (X)</script>,为了<script type="math/tex">z</script>能从<script type="math/tex">N(\mu (X), \Sigma (X))</script>中采样，可以先从<script type="math/tex">\epsilon \sim N(0, 1)</script>中采样，然后计算：</p>
 <script type="math/tex; mode=display">
 z = \mu(X) + \Sigma^{\frac{1}{2}}(X) *\epsilon \tag{公式8}</script><p>这样做的原理是，<script type="math/tex">x \sim N(\mu, \sigma ^ 2)</script>能通过<script type="math/tex">\epsilon \sim  N(0,1)</script>的变换来得到，只要令<script type="math/tex">x = \mu + \sigma * \epsilon</script>即可。</p>
 <p>因此实际上最终计算的梯度是下面的公式：</p>
@@ -799,7 +805,7 @@ E_{X \sim D}[E_{\epsilon \sim N(0,1)} [\log P(X \vert z = \mu (X) + \Sigma^{\fra
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#VAE的思想"><span class="nav-number">1.</span> <span class="nav-text">VAE的思想</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Latent-Variable-Models"><span class="nav-number">2.</span> <span class="nav-text">Latent Variable Models</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VAE相关公式"><span class="nav-number">3.</span> <span class="nav-text">VAE相关公式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#目标函数的优化过程"><span class="nav-number">4.</span> <span class="nav-text">目标函数的优化过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reparameterization-trick"><span class="nav-number">5.</span> <span class="nav-text">reparameterization trick</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考链接："><span class="nav-number">7.</span> <span class="nav-text">参考链接：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#VAE的思想"><span class="nav-number">1.</span> <span class="nav-text">VAE的思想</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Latent-Variable-Models"><span class="nav-number">2.</span> <span class="nav-text">Latent Variable Models</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VAE相关公式"><span class="nav-number">3.</span> <span class="nav-text">VAE相关公式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考链接："><span class="nav-number">5.</span> <span class="nav-text">参考链接：</span></a></li></ol></div>
             
 
           </div>
