@@ -117,7 +117,7 @@
 <meta property="og:description" content="Variatinal autoencoder(VAE)和Generative Adversarial Nets(GAN)是目前两种比较流行的生成式模型。但是这两种模型在模型训练以及原理上是不同的。GAN的思想来自于博弈理论，模型中具有生成式的模型(Generative model)以及辨别式的模型(discriminative model)，模型的目标是找到生成器和辨别器的纳什平衡。而VAE则是通">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://tiffer.cn/images/vae.png">
-<meta property="og:updated_time" content="2019-01-03T08:42:31.997Z">
+<meta property="og:updated_time" content="2019-01-03T13:12:28.065Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Variational Autoencoder的数学原理">
 <meta name="twitter:description" content="Variatinal autoencoder(VAE)和Generative Adversarial Nets(GAN)是目前两种比较流行的生成式模型。但是这两种模型在模型训练以及原理上是不同的。GAN的思想来自于博弈理论，模型中具有生成式的模型(Generative model)以及辨别式的模型(discriminative model)，模型的目标是找到生成器和辨别器的纳什平衡。而VAE则是通">
@@ -400,7 +400,7 @@
                 
               
 
-              <time title="创建时间：2019-01-03 16:32:04 / 修改时间：16:42:31" itemprop="dateCreated datePublished" datetime="2019-01-03T16:32:04+08:00">2019-01-03</time>
+              <time title="创建时间：2019-01-03 16:32:04 / 修改时间：21:12:28" itemprop="dateCreated datePublished" datetime="2019-01-03T16:32:04+08:00">2019-01-03</time>
             
 
             
@@ -1094,7 +1094,39 @@ E_{X \sim D}[E_{\epsilon \sim N(0,1)} [\log P(X \vert z = \mu (X) + \Sigma^{\fra
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(bp, s);
 })();
-</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+</script>
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config("");
 </script>
@@ -1113,10 +1145,9 @@ E_{X \sim D}[E_{\epsilon \sim N(0,1)} [\log P(X \vert z = \mu (X) + \Sigma^{\fra
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
 
-
+    
   
 
-  
 
   
   
