@@ -117,7 +117,7 @@
 <meta property="og:description" content="Variatinal autoencoder(VAE)和Generative Adversarial Nets(GAN)是目前两种比较流行的生成式模型。但是这两种模型在模型训练以及原理上是不同的。GAN的思想来自于博弈理论，模型中具有生成式的模型(Generative model)以及辨别式的模型(discriminative model)，模型的目标是找到生成器和辨别器的纳什平衡。而VAE则是通">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://tiffer.cn/images/vae.png">
-<meta property="og:updated_time" content="2019-01-03T13:12:28.065Z">
+<meta property="og:updated_time" content="2019-01-03T13:18:07.209Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Variational Autoencoder的数学原理">
 <meta name="twitter:description" content="Variatinal autoencoder(VAE)和Generative Adversarial Nets(GAN)是目前两种比较流行的生成式模型。但是这两种模型在模型训练以及原理上是不同的。GAN的思想来自于博弈理论，模型中具有生成式的模型(Generative model)以及辨别式的模型(discriminative model)，模型的目标是找到生成器和辨别器的纳什平衡。而VAE则是通">
@@ -400,7 +400,7 @@
                 
               
 
-              <time title="创建时间：2019-01-03 16:32:04 / 修改时间：21:12:28" itemprop="dateCreated datePublished" datetime="2019-01-03T16:32:04+08:00">2019-01-03</time>
+              <time title="创建时间：2019-01-03 16:32:04 / 修改时间：21:18:07" itemprop="dateCreated datePublished" datetime="2019-01-03T16:32:04+08:00">2019-01-03</time>
             
 
             
@@ -510,12 +510,12 @@ D_{KL}[Q(z \vert X) \Vert P(z \vert X)] &= \sum_z Q(z \vert X) \, \log \frac{Q(z
 &= E_{z \sim Q}[\log Q(z \vert X) - \log P(z \vert X)]
 \end{align} \tag{公式2}</script><p>根据贝叶斯公式有：</p>
 <script type="math/tex; mode=display">
-\begin{align}
+\begin{align*}
 D_{KL}[Q(z \vert X) \Vert P(z \vert X)] &= E_{z \sim Q} \left[ \log Q(z \vert X) - \log \frac{P(X \vert z) P(z)}{P(X)} \right] \\[10pt]
                                         &= E_{z \sim Q}[\log Q(z \vert X) - (\log P(X \vert z) + \log P(z) - \log P(X))] \\[10pt]
                                         &= E_{z \sim Q}[\log Q(z \vert X) - \log P(X \vert z) - \log P(z) + \log P(X)]
 
-\end{align}\tag{公式3}</script><script type="math/tex; mode=display">P(X)$$关于$$z$$的期望可以提出期望的外面，是因为$$P(X)$$不依赖于$$z$$。因此可以得到VAE的目标函数：</script><p>\log P(X) - D_{KL}[Q(z \vert X) \Vert P(z \vert X)] = E_{z \sim Q} [\log P(X \vert z)] - D_{KL}[Q(z \vert X) \Vert P(z)] \tag{公式4}</p>
+\end{align*}\tag{公式3}</script><script type="math/tex; mode=display">P(X)$$关于$$z$$的期望可以提出期望的外面，是因为$$P(X)$$不依赖于$$z$$。因此可以得到VAE的目标函数：</script><p>\log P(X) - D_{KL}[Q(z \vert X) \Vert P(z \vert X)] = E_{z \sim Q} [\log P(X \vert z)] - D_{KL}[Q(z \vert X) \Vert P(z)] \tag{公式4}</p>
 <script type="math/tex; mode=display">
 如上面的公式4中，则是VAE的目标函数的公式。公式4的右边和autoencoder的结构是相同的，$$Q(z|X)$$为encoder,负责将$$X$$生成得到$$z$$，而$$P(X|z)$$则为decoder,负责将$$z$$重新构造为$$X$$。
 
